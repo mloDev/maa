@@ -1,0 +1,160 @@
+{
+  "groupes": [
+    {
+      "id": "14",
+      "groupename": "ADMIN"
+    },
+    {
+      "id": "16",
+      "groupename": "USER');"
+    }
+  ],
+  "groupe_permissions": [
+    {
+      "groupe_id": "14",
+      "permission_id": "91"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "92"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "93"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "94"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "95"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "96"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "97"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "98"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "99"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "100"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "101"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "102"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "103"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "104"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "105"
+    },
+    {
+      "groupe_id": "14",
+      "permission_id": "107);"
+    }
+  ],
+  "permissions": [
+    {
+      "id": "97",
+      "permissionname": "CTRL_GROUPE_ADD_POST"
+    },
+    {
+      "id": "100",
+      "permissionname": "CTRL_GROUPE_DELETE_GET"
+    },
+    {
+      "id": "98",
+      "permissionname": "CTRL_GROUPE_EDIT_GET"
+    },
+    {
+      "id": "99",
+      "permissionname": "CTRL_GROUPE_EDIT_POST"
+    },
+    {
+      "id": "96",
+      "permissionname": "CTRL_GROUPE_LIST_GET"
+    },
+    {
+      "id": "102",
+      "permissionname": "CTRL_PERM_ADD_POST"
+    },
+    {
+      "id": "105",
+      "permissionname": "CTRL_PERM_DELETE_GET"
+    },
+    {
+      "id": "103",
+      "permissionname": "CTRL_PERM_EDIT_GET"
+    },
+    {
+      "id": "104",
+      "permissionname": "CTRL_PERM_EDIT_POST"
+    },
+    {
+      "id": "101",
+      "permissionname": "CTRL_PERM_LIST_GET"
+    },
+    {
+      "id": "107",
+      "permissionname": "CTRL_USER_ADD_GET"
+    },
+    {
+      "id": "92",
+      "permissionname": "CTRL_USER_ADD_POST"
+    },
+    {
+      "id": "95",
+      "permissionname": "CTRL_USER_DELETE_GET"
+    },
+    {
+      "id": "93",
+      "permissionname": "CTRL_USER_EDIT_GET"
+    },
+    {
+      "id": "94",
+      "permissionname": "CTRL_USER_EDIT_POST"
+    },
+    {
+      "id": "91",
+      "permissionname": "CTRL_USER_LIST_GET');"
+    }
+  ],
+  "users": [
+    {
+      "id": "4",
+      "username": "admin",
+      "password": "21232f297a57a5a743894a0e4a801fc3",
+      "enabled": "1",
+      "email": "admin@admin.com",
+      "phone": "+216xxxxxx');"
+    }
+  ],
+  "user_groupes": [
+    {
+      "user_id": "4",
+      "groupe_id": "14);"
+    }
+  ]
+}
