@@ -16,3 +16,9 @@ $(function() {
         }
     })
 })
+
+$.getScript("../../resources/js/autosearch.js", function(){
+
+   alert("Script loaded but not necessarily executed.");
+
+});

@@ -33,7 +33,6 @@ public class SearchController {
 	List<Student> getStudent(@RequestParam String studentParam) {
 		logger.debug("IN:search");
 		return simulateSearchResult(studentParam);
-
 	}
 
 	private List<Student> simulateSearchResult(String studentParam) {
@@ -42,7 +41,7 @@ public class SearchController {
 		List<Student> data = studentService.getStudent();
  		// iterate a list and filter by studentParam
 		for (Student student : data) {
-			if (student.getName().contains(studentParam) || student.getMatNo().contains(studentParam)) {
+			if (student.getName().contains(studentParam) || student.getMatNo().contains(studentParam) || student.getSurName().contains(studentParam)) {
 				result.add(student);
 			}
 		}

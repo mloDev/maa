@@ -22,6 +22,10 @@
 <link type="text/css" rel="stylesheet"
 	href="../../../resources/css/sb-admin.css"
 	data-th-href="@{/resources/css/sb-admin.css}" />
+	
+	<!-- Autocomplete Search Scripts - Include with every page -->
+	<script type="text/javascript" src="../../resources/js/autosearch.js"
+		data-th-src="@{/resources/js/autosearch.js}"></script>
 
 <style>
 .no-border-on-me>thead>tr>th,.no-border-on-me>tbody>tr>th,.no-border-on-me>tfoot>tr>th,.no-border-on-me>thead>tr>td,.no-border-on-me>tbody>tr>td,.no-border-on-me>tfoot>tr>td
@@ -68,9 +72,13 @@
 					<i class="fa fa-area-chart fa-fw"></i></a></li>
 				<li><a href="#" data-th-href="@{/kibana}">
 					<i class="fa fa-pie-chart fa-fw"></i></a></li>
-				<li>						<div class="ui-widget">
-  							<input id="studentSearch"/>
-						</div></li>
+				<li>
+					<form>
+						<div class="ui-widget">
+	  						<input id="studentSearch"/>
+						</div>
+					</form>
+				</li>
 				
 
 				<li><a href="#" data-th-href="@{/chat}"> <i

@@ -80,7 +80,8 @@ public class StudentController {
 				logger.debug("Student/show-GET:  "
 						+ studentDTO.toString());
 				model.addAttribute("studentDTO", studentDTO);
-				logger.info("Student " + student.getName() + " with: " + studentDTO.getReqList().size() + " Reqs.");
+				model.addAttribute("studentReq", studentDTO.getReqList());
+				logger.debug("Student " + student.getId() + " with: " + studentDTO.getReqList().size() + " Reqs.");
 			}
 			return "student-edit";
 		} catch (StudentNotFoundException e) {
