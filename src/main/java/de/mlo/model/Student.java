@@ -1,5 +1,6 @@
 package de.mlo.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ public class Student extends BaseEntity {
 		super();
 	}
 	
-	public Student(String matNo, String matNoOld, String name, String surName, String eMail, Gender gender, Set<Req> reqList) {
+	public Student(String matNo, String matNoOld, String name, String surName, String eMail, Gender gender, List<Req> reqList) {
 		super();
 		this.matNo = matNo;
 		this.matNoOld = matNoOld;
@@ -62,10 +63,11 @@ public class Student extends BaseEntity {
 	@Getter
 	@Setter
 	private Gender gender;
+
 	
-	@OneToMany(mappedBy="student", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="student")
 	@Getter
 	@Setter
-	private Set<Req> reqList;
+	private List<Req> reqList;
 	
 }

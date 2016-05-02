@@ -31,7 +31,7 @@ public class SearchController {
 	@RequestMapping(value = "/getStudent", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Student> getStudent(@RequestParam String studentParam) {
-		logger.info("IN:search");
+		logger.debug("IN:search");
 		return simulateSearchResult(studentParam);
 
 	}

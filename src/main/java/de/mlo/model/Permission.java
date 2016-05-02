@@ -18,6 +18,7 @@ import com.google.common.base.Objects;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Entity
 public class Permission extends BaseEntity implements GrantedAuthority {
 	

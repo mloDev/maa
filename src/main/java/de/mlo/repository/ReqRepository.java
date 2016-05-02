@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import de.mlo.model.Req;
 
-public interface ReqRepository extends JpaRepository<Req, Long> {
+public interface ReqRepository extends JpaRepository<Req, Integer> {
+	
+	Req findByName(String name);
 
 }

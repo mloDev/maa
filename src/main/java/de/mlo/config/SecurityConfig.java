@@ -43,6 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginPage("/login").defaultSuccessUrl("/").permitAll().and()
 				.logout().permitAll().and().exceptionHandling()
 				.accessDeniedHandler(accessDeniedExceptionHandler);
+	    http.authorizeRequests().antMatchers("/").permitAll().and()
+          .authorizeRequests().antMatchers("/console/**").permitAll();
+
+	    http.csrf().disable();
+	    http.headers().frameOptions().disable();
 	}
 	
 

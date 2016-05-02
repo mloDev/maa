@@ -1,5 +1,6 @@
 package de.mlo.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;
@@ -67,6 +68,6 @@ public class StudentDTO {
 	
 	@Getter
 	@Setter
-	private Set<Req> reqList;
+	private List<Req> reqList;
 
 }

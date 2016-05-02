@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
@@ -15,9 +16,7 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 
 @Configuration
 public class ThymeleafConfig {
-	
-	@Autowired public SpringTemplateEngine templateEngine;
-	
+		
 	static Logger logger = LoggerFactory
 			.getLogger(ThymeleafConfig.class);
 
@@ -25,6 +24,7 @@ public class ThymeleafConfig {
 	public TemplateResolver templateResolver() {
 		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
 		templateResolver.setPrefix("/WEB-INF/views/");
+		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode("HTML5");
 		templateResolver.setOrder(1);
 		logger.info("loglog");
@@ -33,6 +33,7 @@ public class ThymeleafConfig {
 
 	@Bean
 	public SpringTemplateEngine templateEngine() {
+		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		templateEngine.setTemplateResolver(templateResolver());
 		return templateEngine;
 	}
