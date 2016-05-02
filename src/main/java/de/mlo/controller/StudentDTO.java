@@ -1,5 +1,6 @@
 package de.mlo.controller;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -13,8 +14,13 @@ import de.mlo.model.Req;
 import lombok.Getter;
 import lombok.Setter;
 
-public class StudentDTO {
+public class StudentDTO implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7554982482666335859L;
+
 	@Getter
 	@Setter
 	private int id;

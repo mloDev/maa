@@ -1,3 +1,7 @@
 [
-   
+     {
+    "_class": "de.mlo.model.Req",
+      "id": "97",
+      "name": "CTRL_GROUPE_ADD_POST"
+    }
 ]

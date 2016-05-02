@@ -1,5 +1,6 @@
 package de.mlo.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -11,8 +12,14 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "students")
-public class Student extends BaseEntity {
+public class Student extends BaseEntity implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2504308260829915442L;
+
+
 	public Student() {
 		super();
 	}
@@ -63,9 +70,9 @@ public class Student extends BaseEntity {
 	@Getter
 	@Setter
 	private Gender gender;
-
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="student")
+	
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
 	@Getter
 	@Setter
 	private List<Req> reqList;

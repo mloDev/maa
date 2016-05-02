@@ -27,6 +27,7 @@ import de.mlo.model.Permission;
 import de.mlo.model.Student;
 import de.mlo.model.User;
 import de.mlo.service.GroupeService;
+import de.mlo.service.ReqService;
 import de.mlo.service.StudentService;
 import de.mlo.service.UserService;
 
@@ -35,7 +36,7 @@ import de.mlo.service.UserService;
 @RequestMapping("/student")
 public class StudentController {
 
-	static Logger logger = LoggerFactory.getLogger(UserController.class);
+	static Logger logger = LoggerFactory.getLogger(StudentController.class);
 	static String businessObject = "student"; // used in RedirectAttributes
 											// messages
 
@@ -44,6 +45,9 @@ public class StudentController {
 
 	@Autowired
 	private MessageSource messageSource;
+	
+	@Autowired
+	private ReqService reqService;
 	
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public String listStudents(Model model) {
@@ -54,7 +58,7 @@ public class StudentController {
 
 		// if there was an error in /add, we do not want to overwrite
 		// the existing user object containing the errors.
-		if (!model.containsAttribute("userDTO")) {
+		if (!model.containsAttribute("studentDTO")) {
 			logger.debug("Adding StudentDTO object to model");
 			StudentDTO studentDTO = new StudentDTO();
 			model.addAttribute("studentDTO", studentDTO);
@@ -76,7 +80,7 @@ public class StudentController {
 				logger.debug("Student/show-GET:  "
 						+ studentDTO.toString());
 				model.addAttribute("studentDTO", studentDTO);
-				logger.info("Student " + student.getName() + " with: " + student.getReqList().size() + " Reqs.");
+				logger.info("Student " + student.getName() + " with: " + studentDTO.getReqList().size() + " Reqs.");
 			}
 			return "student-edit";
 		} catch (StudentNotFoundException e) {
@@ -104,7 +108,7 @@ public class StudentController {
 		studentDTO.setName(student.getName());
 		studentDTO.setSurName(student.getSurName());
 		studentDTO.setGender(student.getGender());
-		studentDTO.setReqList(student.getReqList());
+		studentDTO.setReqList(reqService.getReqsByStudent(student));
 		studentDTO.setLabel(student.getMatNo() + " " + student.getName() + " " + student.getSurName());
 		return studentDTO;
 	}
