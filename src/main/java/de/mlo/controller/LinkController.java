@@ -14,10 +14,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import de.mlo.model.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LinkController.
+ */
 @Controller
 public class LinkController {
+	
+	/** The logger. */
 	static Logger logger = LoggerFactory.getLogger(LinkController.class);
 
+	/**
+	 * Main page.
+	 *
+	 * @param session the session
+	 * @return the string
+	 */
 	@RequestMapping(value = "/")
 	public String mainPage(HttpSession session) {
 		Collection<GrantedAuthority> authorities = getAuthorities();
@@ -49,6 +61,11 @@ public class LinkController {
 		return "home-user";
 	}
 
+	/**
+	 * Index page.
+	 *
+	 * @return the string
+	 */
 	@RequestMapping(value = "/index")
 	public String indexPage() {
 		return "redirect:/";
@@ -56,6 +73,11 @@ public class LinkController {
 	
 
 
+	/**
+	 * Gets the authorities.
+	 *
+	 * @return the authorities
+	 */
 	private Collection<GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
 		Object principal = SecurityContextHolder.getContext()

@@ -15,19 +15,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import de.mlo.model.Student;
 import de.mlo.service.StudentService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SearchController.
+ */
 @Controller
 @RequestMapping(value= "/")
 public class SearchController {
 
 	
+	/** The logger. */
 	static Logger logger = LoggerFactory.getLogger(UserController.class);
+	
+	/** The business object. */
 	static String businessObject = "student"; // used in RedirectAttributes
 											// messages
 	
-	@Autowired
+	/** The student service. */
+											@Autowired
 	private StudentService studentService;
 	
 	
+	/**
+	 * Gets the student.
+	 *
+	 * @param studentParam the student param
+	 * @return the student
+	 */
 	@RequestMapping(value = "/getStudent", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Student> getStudent(@RequestParam String studentParam) {
@@ -35,6 +49,12 @@ public class SearchController {
 		return simulateSearchResult(studentParam);
 	}
 
+	/**
+	 * Simulate search result.
+	 *
+	 * @param studentParam the student param
+	 * @return the list
+	 */
 	private List<Student> simulateSearchResult(String studentParam) {
 		
 		List<Student> result = new ArrayList<Student>();

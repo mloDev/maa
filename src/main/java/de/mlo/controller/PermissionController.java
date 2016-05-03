@@ -29,28 +29,49 @@ import de.mlo.model.Permission;
 import de.mlo.service.GroupeService;
 import de.mlo.service.PermissionService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PermissionController.
+ */
 @Controller
 @RequestMapping(value = "/permission")
 public class PermissionController {
 
+	/** The logger. */
 	static Logger logger = LoggerFactory.getLogger(PermissionController.class);
+	
+	/** The business object. */
 	static String businessObject = "permission"; // used in RedirectAttributes
 													// messages
 
-	@Autowired
+	/** The groupe service. */
+													@Autowired
 	private GroupeService groupeService;
 
+	/** The permission service. */
 	@Autowired
 	private PermissionService permissionService;
 
+	/** The message source. */
 	@Autowired
 	private MessageSource messageSource;
 
+	/**
+	 * Gets the all groupes.
+	 *
+	 * @return the all groupes
+	 */
 	@ModelAttribute("allGroupes")
 	public List<Groupe> getAllGroupes() {
 		return groupeService.getGroupes();
 	}
 
+	/**
+	 * List permissions.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public String listPermissions(Model model) {
 		logger.debug("IN: Permission/list-GET");
@@ -68,6 +89,14 @@ public class PermissionController {
 		return "permission-list";
 	}
 
+	/**
+	 * Adds the permission.
+	 *
+	 * @param permissionDTO the permission dto
+	 * @param result the result
+	 * @param redirectAttrs the redirect attrs
+	 * @return the string
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addPermission(
 			@Valid @ModelAttribute PermissionDTO permissionDTO,
@@ -115,6 +144,15 @@ public class PermissionController {
 		}
 	}
 
+	/**
+	 * Edits the permission.
+	 *
+	 * @param permissionDTO the permission dto
+	 * @param result the result
+	 * @param redirectAttrs the redirect attrs
+	 * @param action the action
+	 * @return the string
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public String editPermission(
 			@Valid @ModelAttribute PermissionDTO permissionDTO,
@@ -176,6 +214,14 @@ public class PermissionController {
 		return "redirect:/permission/list";
 	}
 
+	/**
+	 * Edits the permission page.
+	 *
+	 * @param id the id
+	 * @param model the model
+	 * @param redirectAttrs the redirect attrs
+	 * @return the string
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String editPermissionPage(
 			@RequestParam(value = "id", required = true) Integer id,
@@ -202,6 +248,15 @@ public class PermissionController {
 		}
 	}
 
+	/**
+	 * Delete permission.
+	 *
+	 * @param id the id
+	 * @param phase the phase
+	 * @param model the model
+	 * @param redirectAttrs the redirect attrs
+	 * @return the string
+	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deletePermission(
 			@RequestParam(value = "id", required = true) Integer id,
@@ -257,6 +312,12 @@ public class PermissionController {
 		return "redirect:/permission/list";
 	}
 
+	/**
+	 * Gets the permission dto.
+	 *
+	 * @param perm the perm
+	 * @return the permission dto
+	 */
 	public PermissionDTO getPermissionDTO(Permission perm) {
 		List<Integer> groupeIdList = new ArrayList<Integer>();
 		PermissionDTO permDTO = new PermissionDTO();
@@ -269,6 +330,13 @@ public class PermissionController {
 		return permDTO;
 	}
 
+	/**
+	 * Gets the permission.
+	 *
+	 * @param permissionDTO the permission dto
+	 * @return the permission
+	 * @throws GroupeNotFoundException the groupe not found exception
+	 */
 	public Permission getPermission(PermissionDTO permissionDTO)
 			throws GroupeNotFoundException {
 		Set<Groupe> groupeList = new HashSet<Groupe>();

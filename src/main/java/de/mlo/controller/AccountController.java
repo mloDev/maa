@@ -15,15 +15,29 @@ import de.mlo.model.User;
 import de.mlo.service.UserService;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AccountController.
+ */
 @Controller
 @RequestMapping(value = "/account")
 public class AccountController {
+	
+	/** The logger. */
 	static Logger logger = LoggerFactory
 			.getLogger(AccountController.class);
 	
+	/** The user service. */
 	@Autowired
 	private UserService userService;
 
+	/**
+	 * Usersetting.
+	 *
+	 * @param model the model
+	 * @return the string
+	 * @throws UserNotFoundException the user not found exception
+	 */
 	@RequestMapping(value="setting",method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ROLL_PERM_USER_EDIT_GET')")
 	public String usersetting(final Model model) throws UserNotFoundException {

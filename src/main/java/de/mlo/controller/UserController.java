@@ -28,29 +28,50 @@ import de.mlo.service.GroupeService;
 import de.mlo.service.UserService;
 import de.mlo.model.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserController.
+ */
 @Controller
 @RequestMapping(value = "/user")
 @PreAuthorize("denyAll")
 public class UserController {
+	
+	/** The logger. */
 	static Logger logger = LoggerFactory.getLogger(UserController.class);
+	
+	/** The business object. */
 	static String businessObject = "user"; // used in RedirectAttributes
 											// messages
 
-	@Autowired
+	/** The groupe service. */
+											@Autowired
 	private GroupeService groupeService;
 
+	/** The user service. */
 	@Autowired
 	private UserService userService;
 
+	/** The message source. */
 	@Autowired
 	private MessageSource messageSource;
 
+	/**
+	 * Gets the all groupes.
+	 *
+	 * @return the all groupes
+	 */
 	@ModelAttribute("allGroupes")
 	@PreAuthorize("hasAnyRole('CTRL_USER_LIST_GET','CTRL_USER_EDIT_GET')")
 	public List<Groupe> getAllGroupes() {
 		return groupeService.getGroupes();
 	}
 
+	/**
+	 * Gets the enabled options.
+	 *
+	 * @return the enabled options
+	 */
 	@ModelAttribute("enabledOptions")
 	@PreAuthorize("hasAnyRole('CTRL_USER_LIST_GET','CTRL_USER_EDIT_GET')")
 	public boolean[] getEnabledOptions() {
@@ -60,6 +81,12 @@ public class UserController {
 		return array;
 	}
 
+	/**
+	 * List users.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	@PreAuthorize("hasRole('CTRL_USER_LIST_GET')")
 	public String listUsers(Model model) {
@@ -78,6 +105,14 @@ public class UserController {
 		return "user-list";
 	}
 
+	/**
+	 * Adduserpage.
+	 *
+	 * @param userDTO the user dto
+	 * @param result the result
+	 * @param redirectAttrs the redirect attrs
+	 * @return the string
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('CTRL_USER_ADD_GET')")
 	public String adduserpage(@Valid @ModelAttribute UserDTO userDTO,
@@ -89,6 +124,15 @@ public class UserController {
 
 	}
 
+	/**
+	 * Adds the user.
+	 *
+	 * @param userDTO the user dto
+	 * @param result the result
+	 * @param redirectAttrs the redirect attrs
+	 * @return the string
+	 * @throws Exception the exception
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('CTRL_USER_ADD_POST')")
 	public String addUser(@Valid @ModelAttribute UserDTO userDTO,
@@ -128,6 +172,14 @@ public class UserController {
 	
 	}
 
+	/**
+	 * Edits the user page.
+	 *
+	 * @param id the id
+	 * @param model the model
+	 * @param redirectAttrs the redirect attrs
+	 * @return the string
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('CTRL_USER_EDIT_GET')")
 	public String editUserPage(
@@ -154,6 +206,15 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * Edits the user.
+	 *
+	 * @param userDTO the user dto
+	 * @param result the result
+	 * @param redirectAttrs the redirect attrs
+	 * @param action the action
+	 * @return the string
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('CTRL_USER_EDIT_POST')")
 	public String editUser(@Valid @ModelAttribute UserDTO userDTO,
@@ -205,6 +266,15 @@ public class UserController {
 		return "redirect:/user/list";
 	}
 
+	/**
+	 * Delete user.
+	 *
+	 * @param id the id
+	 * @param phase the phase
+	 * @param model the model
+	 * @param redirectAttrs the redirect attrs
+	 * @return the string
+	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('CTRL_USER_DELETE_GET')")
 	public String deleteUser(
@@ -261,6 +331,12 @@ public class UserController {
 		return "redirect:/user/list";
 	}
 
+	/**
+	 * Gets the user dto.
+	 *
+	 * @param user the user
+	 * @return the user dto
+	 */
 	@PreAuthorize("hasAnyRole('CTRL_USER_EDIT_GET','CTRL_USER_DELETE_GET')")
 	public UserDTO getUserDTO(User user) {
 		UserDTO userDTO = new UserDTO();
@@ -281,6 +357,12 @@ public class UserController {
 		return userDTO;
 	}
 
+	/**
+	 * Gets the user.
+	 *
+	 * @param userDTO the user dto
+	 * @return the user
+	 */
 	@PreAuthorize("hasAnyRole('CTRL_USER_ADD_POST','CTRL_USER_EDIT_POST')")
 	public User getUser(UserDTO userDTO) {
 		User user = new User();
@@ -302,6 +384,11 @@ public class UserController {
 		return user;
 	}
 
+	/**
+	 * Sets the null groupe.
+	 *
+	 * @return the groupe
+	 */
 	@PreAuthorize("hasAnyRole('CTRL_USER_EDIT_GET','CTRL_USER_DELETE_GET','CTRL_USER_ADD_POST','CTRL_USER_EDIT_POST')")
 	public Groupe setNullGroupe() {
 		Groupe groupe = new Groupe();
@@ -310,6 +397,13 @@ public class UserController {
 		return groupe;
 	}
 
+	/**
+	 * Md5endrypt.
+	 *
+	 * @param password the password
+	 * @return the string
+	 * @throws Exception the exception
+	 */
 	private String md5endrypt(String password) throws Exception{
 		
 		 

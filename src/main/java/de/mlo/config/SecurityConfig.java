@@ -15,6 +15,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import de.mlo.exception.AccessDeniedExceptionHandler;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SecurityConfig.
+ */
 @Configuration
 @EnableWebSecurity
 @ComponentScan(basePackageClasses = de.mlo.service.UserServiceImpl.class)
@@ -22,19 +26,37 @@ import de.mlo.exception.AccessDeniedExceptionHandler;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
+	/**
+	 * Configure global.
+	 *
+	 * @param userDetailsService the user details service
+	 * @param auth the auth
+	 * @throws Exception the exception
+	 */
 	@Autowired
 	public void configureGlobal(UserDetailsService userDetailsService,
 			AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 
+	/**
+	 * Password encoder.
+	 *
+	 * @return the md5 password encoder
+	 * @throws Exception the exception
+	 */
 	@Bean
 	public Md5PasswordEncoder passwordEncoder() throws Exception {
 	  return new Md5PasswordEncoder();
 	}
+	
+	/** The access denied exception handler. */
 	@Autowired
 	AccessDeniedExceptionHandler accessDeniedExceptionHandler;
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/resources/**").permitAll()

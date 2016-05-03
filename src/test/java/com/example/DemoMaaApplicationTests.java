@@ -8,11 +8,18 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import de.mlo.config.demoMAAApplication;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DemoMaaApplicationTests.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = demoMAAApplication.class)
 @WebAppConfiguration
 public class DemoMaaApplicationTests {
 
+	/**
+	 * Context loads.
+	 */
 	@Test
 	public void contextLoads() {
 	}

@@ -24,19 +24,35 @@ import de.mlo.exception.GroupeNotFoundException;
 import de.mlo.model.Groupe;
 import de.mlo.service.GroupeService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupeController.
+ */
 @Controller
 @RequestMapping(value = "/groupe")
 public class GroupeController {
 
+	/** The logger. */
 	static Logger logger = LoggerFactory.getLogger(GroupeController.class);
+	
+	/** The business object. */
 	static String businessObject = "groupe"; // used in RedirectAttributes
+												
+												/** The groupe service. */
 												// messages
 	@Autowired
 	private GroupeService groupeService;
 
+	/** The message source. */
 	@Autowired
 	private MessageSource messageSource;
 
+	/**
+	 * List of groupes.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	@PreAuthorize("hasRole('CTRL_GROUPE_LIST_GET')")
 	public String listOfGroupes(Model model) {
@@ -55,6 +71,14 @@ public class GroupeController {
 		return "groupe-list";
 	}
 
+	/**
+	 * Adds the groupe.
+	 *
+	 * @param groupe the groupe
+	 * @param result the result
+	 * @param redirectAttrs the redirect attrs
+	 * @return the string
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('CTRL_GROUPE_ADD_POST')")
 	public String addGroupe(@Valid @ModelAttribute Groupe groupe,
@@ -89,6 +113,14 @@ public class GroupeController {
 		}
 	}
 
+	/**
+	 * Edits the groupe page.
+	 *
+	 * @param id the id
+	 * @param model the model
+	 * @param redirectAttrs the redirect attrs
+	 * @return the string
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('CTRL_GROUPE_EDIT_GET')")
 	public String editGroupePage(
@@ -114,6 +146,15 @@ public class GroupeController {
 		}
 	}
 
+	/**
+	 * Edits the groupe.
+	 *
+	 * @param groupe the groupe
+	 * @param result the result
+	 * @param redirectAttrs the redirect attrs
+	 * @param action the action
+	 * @return the string
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('CTRL_GROUPE_EDIT_POST')")
 	public String editGroupe(@Valid @ModelAttribute Groupe groupe,
@@ -165,6 +206,15 @@ public class GroupeController {
 		return "redirect:/groupe/list";
 	}
 
+	/**
+	 * Delete groupe page.
+	 *
+	 * @param id the id
+	 * @param phase the phase
+	 * @param model the model
+	 * @param redirectAttrs the redirect attrs
+	 * @return the string
+	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('CTRL_GROUPE_DELETE_GET')")
 	public String deleteGroupePage(
