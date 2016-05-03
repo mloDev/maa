@@ -38,11 +38,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/resources/**").permitAll()
-				.antMatchers("/error/**").permitAll()
-				.anyRequest().authenticated().and().formLogin()
+				.antMatchers("/error/**").permitAll().anyRequest().authenticated().and().formLogin()
 				.loginPage("/login").defaultSuccessUrl("/").permitAll().and()
 				.logout().permitAll().and().exceptionHandling()
 				.accessDeniedHandler(accessDeniedExceptionHandler);
+	    http.authorizeRequests().antMatchers("/").permitAll().and()
+          .authorizeRequests().antMatchers("/console/**").permitAll();
+
+	    http.csrf().disable();
+	    http.headers().frameOptions().disable();
 	}
 	
 

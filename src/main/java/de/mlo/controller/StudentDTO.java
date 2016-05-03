@@ -1,7 +1,8 @@
 package de.mlo.controller;
 
-import java.util.Set;
-
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -12,8 +13,13 @@ import de.mlo.model.Req;
 import lombok.Getter;
 import lombok.Setter;
 
-public class StudentDTO {
+public class StudentDTO implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7554982482666335859L;
+
 	@Getter
 	@Setter
 	private int id;
@@ -29,8 +35,6 @@ public class StudentDTO {
 	@Setter
 	private String matNo;
 	
-	@NotNull(message = "{error.student.matNoOld.null}")
-	@NotEmpty(message = "{error.student.matNoOld.empty}")
 	@Size(max = 50, message = "{error.studentOld.matNo.max}")
 	@Getter
 	@Setter
@@ -50,8 +54,6 @@ public class StudentDTO {
 	@Setter
 	private String surName;
 	
-	@NotNull(message = "{error.student.birthName.null}")
-	@NotEmpty(message = "{error.student.birthName.empty}")
 	@Size(max = 50, message = "{error.student.birthName.max}")
 	@Getter
 	@Setter
@@ -67,6 +69,46 @@ public class StudentDTO {
 	
 	@Getter
 	@Setter
-	private Set<Req> reqList;
+	private List<Req> reqList;
+	
+	@Getter
+	@Setter
+	private boolean inactive;
+	
+	@Getter
+	@Setter
+	private boolean archived;
+	
+	@Getter
+	@Setter
+	private int archivYear;
+
+	@Getter
+	@Setter
+	private Date gebDate;
+	
+	@Getter
+	@Setter
+	private String phone;
+
+	@Getter
+	@Setter
+	private String mobile;
+	
+	@Getter
+	@Setter
+	private String 	maritalStatus;
+	
+	@Getter
+	@Setter
+	private String svNo;
+	
+	@Getter
+	@Setter
+	private int	fs;
+	
+	@Getter
+	@Setter
+	private boolean	priceWinner;
 
 }

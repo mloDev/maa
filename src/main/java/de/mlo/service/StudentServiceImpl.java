@@ -39,7 +39,6 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public void updateStudent(Student student) throws DublicateStudentException {
 		studentRepo.saveAndFlush(student);
-		
 	}
 
 	@Override

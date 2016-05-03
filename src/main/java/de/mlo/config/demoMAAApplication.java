@@ -1,9 +1,11 @@
 package de.mlo.config;
 
 
+import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -54,6 +56,13 @@ public class demoMAAApplication extends WebMvcConfigurerAdapter{
 			accessDeniedExceptionHandler.setErrorPage("/error/accessDeniedPage");
 			return accessDeniedExceptionHandler;
 		}
+		
+	    @Bean
+	    ServletRegistrationBean h2servletRegistration(){
+	        ServletRegistrationBean registrationBean = new ServletRegistrationBean( new WebServlet());
+	        registrationBean.addUrlMappings("/console/*");
+	        return registrationBean;
+	    }
 
 
 		// Maps resources path to webapp/resources

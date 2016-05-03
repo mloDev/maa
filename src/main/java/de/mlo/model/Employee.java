@@ -13,7 +13,7 @@ import lombok.Setter;
 @Entity
 public class Employee extends BaseEntity {
 	
-	@Column(nullable = true)
+	@Column
 	@Getter
 	@Setter
 	private String name;
