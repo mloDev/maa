@@ -40,30 +40,51 @@ import de.mlo.service.StudentService;
 import de.mlo.service.UserService;
 import scala.annotation.meta.setter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StudentController.
+ */
 @SuppressWarnings("unused")
 @Controller
 @RequestMapping("/student")
 public class StudentController {
 
+	/** The logger. */
 	static Logger logger = LoggerFactory.getLogger(StudentController.class);
+	
+	/** The business object. */
 	static String businessObject = "student"; // used in RedirectAttributes
 											// messages
 
-	@Autowired
+	/** The student service. */
+											@Autowired
 	private StudentService studentService;
 
+	/** The message source. */
 	@Autowired
 	private MessageSource messageSource;
 	
+	/** The req service. */
 	@Autowired
 	private ReqService reqService;
 	
+	/**
+	 * Inits the binder.
+	 *
+	 * @param binder the binder
+	 */
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
         CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true);
         binder.registerCustomEditor(Date.class, editor);
     }
 	
+	/**
+	 * List students.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public String listStudents(Model model) {
 		logger.debug("IN: Student/list-GET");
@@ -81,6 +102,14 @@ public class StudentController {
 		return "student-list";
 	}
 	
+	/**
+	 * Show student.
+	 *
+	 * @param id the id
+	 * @param model the model
+	 * @param redirectAttrs the redirect attrs
+	 * @return the string
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String showStudent(@RequestParam(value = "id", required = true) Integer id,
 		Model model, RedirectAttributes redirectAttrs) {
@@ -109,6 +138,19 @@ public class StudentController {
 	}
 	
 	
+	/**
+	 * Edits the student.
+	 *
+	 * @param studentDTO the student dto
+	 * @param result the result
+	 * @param redirectAttrs the redirect attrs
+	 * @param action the action
+	 * @return the string
+	 * @throws UserNotFoundException the user not found exception
+	 * @throws DuplicateUserException the duplicate user exception
+	 * @throws DublicateStudentException the dublicate student exception
+	 * @throws StudentNotFoundException the student not found exception
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public String editStudent(@Valid @ModelAttribute StudentDTO studentDTO,
 			BindingResult result, RedirectAttributes redirectAttrs,
@@ -145,6 +187,12 @@ public class StudentController {
 		return "redirect:/student/edit?id=" + studentDTO.getId();
 	}
 
+	/**
+	 * Gets the student dto.
+	 *
+	 * @param student the student
+	 * @return the student dto
+	 */
 	private StudentDTO getStudentDTO(Student student) {
 		StudentDTO studentDTO = new StudentDTO();
 		studentDTO.setId(student.getId());
@@ -170,6 +218,12 @@ public class StudentController {
 		return studentDTO;
 	}
 	
+	/**
+	 * Gets the student.
+	 *
+	 * @param studentDTO the student dto
+	 * @return the student
+	 */
 	private Student getStudent(StudentDTO studentDTO) {
 		Student student = new Student(studentDTO.getMatNo(), studentDTO.getMatNoOld(), studentDTO.getName(), studentDTO.getSurName(), studentDTO.getEMail(), studentDTO.getGender(), studentDTO.getReqList());
 		student.setId(studentDTO.getId());
