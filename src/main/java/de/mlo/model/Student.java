@@ -1,10 +1,14 @@
 package de.mlo.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import de.mlo.enums.Gender;
 import lombok.Getter;
@@ -64,6 +68,60 @@ public class Student extends BaseEntity implements Serializable {
 	@Getter
 	@Setter
 	private String eMail;
+	
+	@Column
+	@Getter
+	@Setter
+	private boolean inactive;
+	
+	@Column
+	@Getter
+	@Setter
+	private boolean archived;
+	
+	@Column
+	@Getter
+	@Setter
+	private int archivYear;
+	
+	@Column
+	@Getter
+	@Setter
+	@Type(type="java.util.Date")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	private Date gebDate;
+	
+	@Column
+	@Getter
+	@Setter
+	private String phone;
+
+	@Column
+	@Getter
+	@Setter
+	private String mobile;
+	
+	@Column
+	@Getter
+	@Setter
+	private String 	maritalStatus;
+	
+	@Column
+	@Getter
+	@Setter
+	private String svNo;
+	
+	@Column
+	@Getter
+	@Setter
+	private int	fs;
+	
+	@Column
+	@Getter
+	@Setter
+	private boolean	priceWinner;
+	
+	
 	
 	@Enumerated(EnumType.STRING)
 	@Column

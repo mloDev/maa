@@ -11,7 +11,7 @@ import lombok.Setter;
 @Entity
 public class Institut extends BaseEntity {
 	
-	@Column(nullable = false)
+	@Column
 	@Getter
 	@Setter
 	private String name;

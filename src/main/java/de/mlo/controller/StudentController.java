@@ -1,6 +1,8 @@
 package de.mlo.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -9,19 +11,25 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import de.mlo.exception.DublicateStudentException;
+import de.mlo.exception.DuplicateUserException;
 import de.mlo.exception.PermissionNotFoundException;
 import de.mlo.exception.StudentNotFoundException;
+import de.mlo.exception.UserNotFoundException;
 import de.mlo.model.Groupe;
 import de.mlo.model.Permission;
 import de.mlo.model.Student;
@@ -30,6 +38,7 @@ import de.mlo.service.GroupeService;
 import de.mlo.service.ReqService;
 import de.mlo.service.StudentService;
 import de.mlo.service.UserService;
+import scala.annotation.meta.setter;
 
 @SuppressWarnings("unused")
 @Controller
@@ -48,6 +57,12 @@ public class StudentController {
 	
 	@Autowired
 	private ReqService reqService;
+	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true);
+        binder.registerCustomEditor(Date.class, editor);
+    }
 	
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public String listStudents(Model model) {
@@ -93,11 +108,41 @@ public class StudentController {
 		}	
 	}
 	
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public String editStudent(@Valid @ModelAttribute StudentDTO studentDTO,
 			BindingResult result, RedirectAttributes redirectAttrs,
-			@RequestParam(value = "action", required = true) String action) {
-		return null;
+			@RequestParam(value = "action", required = true) String action) throws UserNotFoundException, DuplicateUserException, DublicateStudentException, StudentNotFoundException {
+		logger.info(result.toString());
+		if (action.equals(messageSource.getMessage("button.action.cancel",
+				null, Locale.US))) {
+			String message = messageSource.getMessage(
+					"ctrl.message.success.cancel", new Object[] { "Edit",
+							businessObject, studentDTO.getName() }, Locale.US);
+			redirectAttrs.addFlashAttribute("message", message);
+		} else if (result.hasErrors()) {
+			logger.debug("Student-edit error: " + result.toString());
+			redirectAttrs.addFlashAttribute(
+					"org.springframework.validation.BindingResult.studentDTO",
+					result);
+			redirectAttrs.addFlashAttribute("studentDTO", studentDTO);
+			return "redirect:/student/list";
+		} else if (action.equals(messageSource.getMessage("button.action.save",
+				null, Locale.US))) {
+			logger.debug("Student/edit-POST:  " + studentDTO.toString());
+			Student student = getStudent(studentDTO);
+
+			logger.info("Student generated id: " + studentDTO.getId());
+			studentService.updateStudent(student);
+
+			logger.info("Student saved id: " + student.getId());
+			String message = messageSource.getMessage(
+					"ctrl.message.success.update", new Object[] {
+							businessObject, studentDTO.getName() },
+					Locale.US);
+			redirectAttrs.addFlashAttribute("message", message);
+		}
+		return "redirect:/student/edit?id=" + studentDTO.getId();
 	}
 
 	private StudentDTO getStudentDTO(Student student) {
@@ -105,17 +150,40 @@ public class StudentController {
 		studentDTO.setId(student.getId());
 		studentDTO.setMatNo(student.getMatNo());
 		studentDTO.setMatNoOld(student.getMatNoOld());
+		studentDTO.setArchived(student.isArchived());
+		studentDTO.setBirthName(student.getBirthName());
+		studentDTO.setInactive(student.isInactive());
+		studentDTO.setPriceWinner(student.isPriceWinner());
+		studentDTO.setPhone(student.getPhone());
+		studentDTO.setMaritalStatus(student.getMaritalStatus());
+		studentDTO.setMobile(student.getMobile());
 		studentDTO.setEMail(student.getEMail());
+		studentDTO.setGebDate(student.getGebDate());
 		studentDTO.setName(student.getName());
 		studentDTO.setSurName(student.getSurName());
 		studentDTO.setGender(student.getGender());
 		studentDTO.setReqList(reqService.getReqsByStudent(student));
 		studentDTO.setLabel(student.getMatNo() + " " + student.getName() + " " + student.getSurName());
+		studentDTO.setArchivYear(student.getArchivYear());
+		studentDTO.setFs(student.getFs());
+		studentDTO.setSvNo(student.getSvNo());
 		return studentDTO;
 	}
 	
 	private Student getStudent(StudentDTO studentDTO) {
 		Student student = new Student(studentDTO.getMatNo(), studentDTO.getMatNoOld(), studentDTO.getName(), studentDTO.getSurName(), studentDTO.getEMail(), studentDTO.getGender(), studentDTO.getReqList());
+		student.setId(studentDTO.getId());
+		student.setArchived(studentDTO.isArchived());
+		student.setBirthName(studentDTO.getBirthName());
+		student.setInactive(studentDTO.isInactive());
+		student.setPriceWinner(studentDTO.isPriceWinner());
+		student.setGebDate(studentDTO.getGebDate());
+		student.setPhone(studentDTO.getPhone());
+		student.setMobile(studentDTO.getMobile());
+		student.setMaritalStatus(studentDTO.getMaritalStatus());
+		student.setFs(studentDTO.getFs());
+		student.setArchivYear(studentDTO.getArchivYear());
+		student.setSvNo(studentDTO.getSvNo());
 		return student;
 	}
 }

@@ -997,4 +997,89 @@
 {"_class":"de.mlo.model.Student","name":"Freeman","matNo":934544,"email":"mfreemanro@newsvine.com","surName":"Maëlyss"},
 {"_class":"de.mlo.model.Student","name":"Elliott","matNo":1688776,"email":"jelliottrp@cnn.com","surName":"Zhì"},
 {"_class":"de.mlo.model.Student","name":"Flores","matNo":3500520,"email":"rfloresrq@rediff.com","surName":"Félicie"},
-{"_class":"de.mlo.model.Student","name":"Cruz","matNo":4928810,"email":"mcruzrr@usda.gov","surName":"Méghane"}]
+{"_class":"de.mlo.model.Student","name":"Cruz","matNo":4928810,"email":"mcruzrr@usda.gov","surName":"Méghane"},
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "97",
+      "permissionname": "CTRL_GROUPE_ADD_POST"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "100",
+      "permissionname": "CTRL_GROUPE_DELETE_GET"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "98",
+      "permissionname": "CTRL_GROUPE_EDIT_GET"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "99",
+      "permissionname": "CTRL_GROUPE_EDIT_POST"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "96",
+      "permissionname": "CTRL_GROUPE_LIST_GET"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "102",
+      "permissionname": "CTRL_PERM_ADD_POST"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "105",
+      "permissionname": "CTRL_PERM_DELETE_GET"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "103",
+      "permissionname": "CTRL_PERM_EDIT_GET"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "104",
+      "permissionname": "CTRL_PERM_EDIT_POST"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "101",
+      "permissionname": "CTRL_PERM_LIST_GET"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "107",
+      "permissionname": "CTRL_USER_ADD_GET"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "92",
+      "permissionname": "CTRL_USER_ADD_POST"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "95",
+      "permissionname": "CTRL_USER_DELETE_GET"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "93",
+      "permissionname": "CTRL_USER_EDIT_GET"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "94",
+      "permissionname": "CTRL_USER_EDIT_POST"
+    },
+    {
+    "_class": "de.mlo.model.Permission",
+      "id": "91",
+      "permissionname": "CTRL_USER_LIST_GET"
+    },
+    {
+    "_class": "de.mlo.model.Groupe",
+    "id": 16,
+    "groupename": "USER"
+  }]

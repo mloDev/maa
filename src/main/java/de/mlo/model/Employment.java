@@ -14,7 +14,7 @@ public class Employment extends BaseEntity{
 	@Setter
 	private String name;
 	
-	@Column(nullable = true)
+	@Column
 	@Getter
 	@Setter
 	private String desc;

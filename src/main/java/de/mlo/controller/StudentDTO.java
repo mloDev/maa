@@ -1,9 +1,8 @@
 package de.mlo.controller;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -36,8 +35,6 @@ public class StudentDTO implements Serializable {
 	@Setter
 	private String matNo;
 	
-	@NotNull(message = "{error.student.matNoOld.null}")
-	@NotEmpty(message = "{error.student.matNoOld.empty}")
 	@Size(max = 50, message = "{error.studentOld.matNo.max}")
 	@Getter
 	@Setter
@@ -57,8 +54,6 @@ public class StudentDTO implements Serializable {
 	@Setter
 	private String surName;
 	
-	@NotNull(message = "{error.student.birthName.null}")
-	@NotEmpty(message = "{error.student.birthName.empty}")
 	@Size(max = 50, message = "{error.student.birthName.max}")
 	@Getter
 	@Setter
@@ -75,5 +70,45 @@ public class StudentDTO implements Serializable {
 	@Getter
 	@Setter
 	private List<Req> reqList;
+	
+	@Getter
+	@Setter
+	private boolean inactive;
+	
+	@Getter
+	@Setter
+	private boolean archived;
+	
+	@Getter
+	@Setter
+	private int archivYear;
+
+	@Getter
+	@Setter
+	private Date gebDate;
+	
+	@Getter
+	@Setter
+	private String phone;
+
+	@Getter
+	@Setter
+	private String mobile;
+	
+	@Getter
+	@Setter
+	private String 	maritalStatus;
+	
+	@Getter
+	@Setter
+	private String svNo;
+	
+	@Getter
+	@Setter
+	private int	fs;
+	
+	@Getter
+	@Setter
+	private boolean	priceWinner;
 
 }
