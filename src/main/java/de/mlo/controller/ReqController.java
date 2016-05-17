@@ -177,7 +177,7 @@ public class ReqController {
 		req.setId(reqDTO.getId());
 
 		req.setName(reqDTO.getName());
-		req.setStudent(studentService.getStudent(reqDTO.getId()));
+		req.setStudent(studentService.getStudent(reqDTO.getStudent().getId()));
 		return req;
 	}
 
@@ -191,11 +191,12 @@ public class ReqController {
 	 * @return the string
 	 * @throws ReqNotFoundException the req not found exception
 	 * @throws UserNotFoundException the user not found exception
+	 * @throws StudentNotFoundException 
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String editReqPage(
 			@RequestParam(value = "id", required = true) Integer id,
-			Model model, RedirectAttributes redirectAttrs) throws ReqNotFoundException, UserNotFoundException {
+			Model model, RedirectAttributes redirectAttrs) throws ReqNotFoundException, UserNotFoundException, StudentNotFoundException {
 
 
 		if (!model.containsAttribute("reqDTO")) {
@@ -211,13 +212,14 @@ public class ReqController {
 	 *
 	 * @param req the req
 	 * @return the req dto
+	 * @throws StudentNotFoundException 
 	 */
-	private ReqDTO getReqDTO(Req req) {
+	private ReqDTO getReqDTO(Req req) throws StudentNotFoundException {
 		ReqDTO reqDTO = new ReqDTO();
 		reqDTO.setId(req.getId());
 		reqDTO.setName(req.getName());
-		reqDTO.setStudent(req.getStudent());
-		return null;
+		reqDTO.setStudent(studentService.getStudent(req.getStudent().getId()));
+		return reqDTO;
 	}
 
 
