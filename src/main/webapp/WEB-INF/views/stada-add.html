@@ -108,6 +108,7 @@
 										data-th-text="#{stada.employeeOne.label}">MatNo</label>
 										<div class="col-sm-7">
 											<select class="form-control" th:field="*{employeeOne.id}">
+												<option th:value="0" text="Please Select"></option>
                                       			<option th:each="employee : ${allEmployee}" th:value="${employee.id}" th:text="${employee.name}">Employee One</option>
                                     		</select>
 										</div>
@@ -117,6 +118,7 @@
 										data-th-text="#{stada.employeeTwo.label}">MatNo</label>
 										<div class="col-sm-7">
 											<select class="form-control" th:field="*{employeeTwo.id}">
+												<option th:value="0" text="Please Select"></option>
                                       			<option th:each="employee : ${allEmployee}" th:value="${employee.id}" th:text="${employee.name}">Employee One</option>
                                     		</select>
 										</div>
@@ -194,6 +196,7 @@
 										data-th-text="#{stada.institut.label}">Institut</label>
 										<div class="col-sm-7">
 											<select class="form-control" th:field="*{institut.id}">
+												<option th:value="0" text="Please Select"></option>
                                       			<option th:each="institut : ${allInstituts}" th:value="${institut.id}" th:text="${institut.name}">Institut</option>
                                     		</select>
 										</div>
@@ -203,6 +206,7 @@
 										data-th-text="#{stada.examCategory.label}">Exam Category</label>
 										<div class="col-sm-7">
 											<select class="form-control" th:field="*{examCategory.id}">
+												<option th:value="0" text="Please Select"></option>
                                       			<option th:each="examCategory : ${allExamCategories}" th:value="${examCategory.id}" th:text="${examCategory.name}">Exam Category</option>
                                     		</select>
 										</div>

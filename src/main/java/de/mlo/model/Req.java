@@ -2,15 +2,12 @@ package de.mlo.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
 import lombok.Getter;
 import lombok.Setter;
 

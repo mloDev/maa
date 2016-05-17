@@ -1117,5 +1117,11 @@
     "_class": "de.mlo.model.examCategory",
     "id": 100001,
     "name": "Schlüsselqualifikation, fachübergreifend"
+  },        {
+    "_class": "de.mlo.model.Employee",
+    "id": 100001,
+    "name": "Manuel",
+    "surName": "Lorenz",
+    "eMail": "mitarbeiter1@uni.de"
   }
  ]

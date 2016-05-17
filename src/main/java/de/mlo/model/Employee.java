@@ -87,7 +87,7 @@ public class Employee extends BaseEntity {
 	 * @param telNo the new tel no
 	 */
 	@Setter
-	private int telNo;
+	private String telNo;
 	
 	/** The tel fax. */
 	@Column(nullable = true)
@@ -141,7 +141,7 @@ public class Employee extends BaseEntity {
 	 * @param privTel the new priv tel
 	 */
 	@Setter
-	private int privTel;
+	private String privTel;
 	
 	/** The priv fax. */
 	@Column(nullable = true)
@@ -159,7 +159,7 @@ public class Employee extends BaseEntity {
 	 * @param privFax the new priv fax
 	 */
 	@Setter
-	private int privFax;
+	private String privFax;
 	
 	/** The mobil no. */
 	@Column(nullable = true)
@@ -177,7 +177,7 @@ public class Employee extends BaseEntity {
 	 * @param mobilNo the new mobil no
 	 */
 	@Setter
-	private int mobilNo;
+	private String mobilNo;
 	
 	/** The allow exam. */
 	@Column(nullable = true)
@@ -359,6 +359,9 @@ public class Employee extends BaseEntity {
 	@Setter
 	private int lvvo;
 	
-	
+	@Column
+	@Getter
+	@Setter
+	private boolean archived;
 
 }

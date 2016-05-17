@@ -20,7 +20,6 @@ import de.mlo.exception.DuplicateReqException;
 import de.mlo.exception.StudentNotFoundException;
 import de.mlo.model.Employee;
 import de.mlo.model.Institut;
-import de.mlo.model.Req;
 import de.mlo.model.Stada;
 import de.mlo.model.Student;
 import de.mlo.model.examCategory;
