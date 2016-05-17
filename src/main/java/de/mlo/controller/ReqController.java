@@ -40,7 +40,7 @@ public class ReqController {
 											// messages
 
 	/** The message source. */
-											@Autowired
+	@Autowired
 	private MessageSource messageSource;
 
 	/** The req service. */
@@ -107,8 +107,8 @@ public class ReqController {
 	 * @return the string
 	 * @throws Exception the exception
 	 */
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addUser(@Valid @ModelAttribute ReqDTO reqDTO,
+	@RequestMapping(value = {"/add"}, method = RequestMethod.POST)
+	public String addReq(@Valid @ModelAttribute ReqDTO reqDTO,
 			BindingResult result, RedirectAttributes redirectAttrs) throws Exception {
 
 
@@ -128,9 +128,43 @@ public class ReqController {
 			redirectAttrs.addFlashAttribute("message", message);
 			return "redirect:/req/list";
 		}
-	
 	}
 
+	
+	@RequestMapping(value = "/addRequest", method = RequestMethod.GET)
+	public String addReqPageById(
+			@RequestParam(value = "id", required = true) Integer id,
+			Model model, RedirectAttributes redirectAttrs, @Valid @ModelAttribute ReqDTO reqDTO,
+			BindingResult result) throws StudentNotFoundException, DuplicateReqException {
+		model.addAttribute("studentDTO", studentService.getStudent(id));
+		reqDTO.setStudent(studentService.getStudent(id));
+		return "req-add";
+	}
+	
+	@RequestMapping(value = {"/addRequest"}, method = RequestMethod.POST)
+	public String addReqById(@RequestParam(value = "id", required = true) Integer id,
+			@Valid @ModelAttribute ReqDTO reqDTO,
+			BindingResult result, RedirectAttributes redirectAttrs) throws Exception {
+
+
+		if (result.hasErrors()) {
+			redirectAttrs.addFlashAttribute(
+					"org.springframework.validation.BindingResult.reqDTO",
+					result);
+			redirectAttrs.addFlashAttribute("reqDTO", reqDTO);
+			return "redirect:/req/list";
+		} else {
+			Req req = new Req();
+			req = getReq(reqDTO);
+			reqService.addReq(req);
+			String message = messageSource
+					.getMessage("ctrl.message.success.add", new Object[] {
+							businessObject, req.getName() }, Locale.US);
+			redirectAttrs.addFlashAttribute("message", message);
+			return "redirect:/student/edit?id=" + id;
+		}
+	}
+	
 	/**
 	 * Gets the req.
 	 *
@@ -143,7 +177,7 @@ public class ReqController {
 		req.setId(reqDTO.getId());
 
 		req.setName(reqDTO.getName());
-		req.setStudent(studentService.getStudent(reqDTO.getStudentId()));
+		req.setStudent(studentService.getStudent(reqDTO.getId()));
 		return req;
 	}
 
@@ -182,7 +216,7 @@ public class ReqController {
 		ReqDTO reqDTO = new ReqDTO();
 		reqDTO.setId(req.getId());
 		reqDTO.setName(req.getName());
-		reqDTO.setStudentId(req.getStudent().getId());
+		reqDTO.setStudent(req.getStudent());
 		return null;
 	}
 

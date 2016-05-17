@@ -288,7 +288,7 @@ public class Employee extends BaseEntity {
 	private String street;
 	
 	/** The title. */
-	@OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	
 	/**
 	 * Gets the title.
@@ -306,7 +306,7 @@ public class Employee extends BaseEntity {
 	private Title title;
 	
 	/** The institut. */
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	
 	/**
 	 * Gets the institut.
@@ -324,7 +324,7 @@ public class Employee extends BaseEntity {
 	private Institut institut;	
 	
 	/** The employment. */
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	
 	/**
 	 * Gets the employment.

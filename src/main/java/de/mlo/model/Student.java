@@ -9,6 +9,8 @@ import javax.persistence.*;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.google.common.base.Objects;
+
 import de.mlo.enums.Gender;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,15 +43,13 @@ public class Student extends BaseEntity implements Serializable {
 	 * @param surName the sur name
 	 * @param eMail the e mail
 	 * @param gender the gender
-	 * @param reqList the req list
 	 */
-	public Student(String matNo, String matNoOld, String name, String surName, String eMail, Gender gender, List<Req> reqList) {
+	public Student(String matNo, String matNoOld, String name, String surName, String eMail, Gender gender) {
 		super();
 		this.matNo = matNo;
 		this.matNoOld = matNoOld;
 		this.surName = surName;
 		this.name = name;
-		this.reqList = reqList;
 		this.eMail = eMail;
 		this.gender = gender;
 	}
@@ -367,8 +367,9 @@ public class Student extends BaseEntity implements Serializable {
 	
 	
 	/** The req list. */
-	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "student_reqs", joinColumns = { @JoinColumn(name = "student_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "req_id", referencedColumnName = "id") })
+	 
 	/**
 	 * Gets the req list.
 	 *
@@ -383,5 +384,38 @@ public class Student extends BaseEntity implements Serializable {
 	 */
 	@Setter
 	private List<Req> reqList;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "student_id")
+	@Getter
+	@Setter
+	private List<Stada> stadaList;
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null)
+			return false;
+
+		if (o instanceof Student) {
+			final Student other = (Student) o;
+			return Objects.equal(getId(), other.getId())
+					&& Objects.equal(getMatNo(),
+							other.getMatNo());
+		}
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(getId(), getMatNo());
+	}
 	
 }

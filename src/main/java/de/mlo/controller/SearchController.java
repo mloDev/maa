@@ -2,7 +2,6 @@ package de.mlo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import de.mlo.model.Student;
 import de.mlo.service.StudentService;
 
@@ -45,7 +43,7 @@ public class SearchController {
 	@RequestMapping(value = "/getStudent", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Student> getStudent(@RequestParam String studentParam) {
-		logger.debug("IN:search");
+		logger.debug("IN:search: searchParam: " + studentParam);
 		return simulateSearchResult(studentParam);
 	}
 
@@ -61,7 +59,7 @@ public class SearchController {
 		List<Student> data = studentService.getStudent();
  		// iterate a list and filter by studentParam
 		for (Student student : data) {
-			if (student.getName().contains(studentParam) || student.getMatNo().contains(studentParam) || student.getSurName().contains(studentParam)) {
+			if (student.getName().toLowerCase().contains(studentParam.toLowerCase()) || student.getMatNo().contains(studentParam) || student.getSurName().toLowerCase().contains(studentParam.toLowerCase())) {
 				result.add(student);
 			}
 		}

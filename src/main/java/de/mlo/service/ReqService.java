@@ -5,7 +5,6 @@ import java.util.List;
 import de.mlo.exception.DuplicateReqException;
 import de.mlo.exception.ReqNotFoundException;
 import de.mlo.model.Req;
-import de.mlo.model.Student;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -66,12 +65,6 @@ public interface ReqService {
 	 */
 	public List<Req> getReqs();
 
-	/**
-	 * Gets the reqs by student.
-	 *
-	 * @param student the student
-	 * @return the reqs by student
-	 */
-	public List<Req> getReqsByStudent(Student student);
+	public List<Req> getReqsByStudent(int studentId);
 
 }

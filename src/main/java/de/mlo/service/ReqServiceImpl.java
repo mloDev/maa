@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import de.mlo.exception.DuplicateReqException;
 import de.mlo.exception.ReqNotFoundException;
 import de.mlo.model.Req;
-import de.mlo.model.Student;
 import de.mlo.repository.ReqRepository;
 
 
@@ -30,7 +29,7 @@ public class ReqServiceImpl implements ReqService {
 	 */
 	@Override
 	public void addReq(Req req) throws DuplicateReqException {
-		reqRepo.save(req);
+		reqRepo.saveAndFlush(req);
 	}
 
 	/* (non-Javadoc)
@@ -54,7 +53,7 @@ public class ReqServiceImpl implements ReqService {
 	 */
 	@Override
 	public void updateReq(Req req) throws ReqNotFoundException, DuplicateReqException {
-		reqRepo.save(req);
+		reqRepo.saveAndFlush(req);
 	}
 
 	/* (non-Javadoc)
@@ -78,8 +77,8 @@ public class ReqServiceImpl implements ReqService {
 	 * @see de.mlo.service.ReqService#getReqsByStudent(de.mlo.model.Student)
 	 */
 	@Override
-	public List<Req> getReqsByStudent(Student student) {
-		return reqRepo.findAllByStudent(student);
+	public List<Req> getReqsByStudent(int studentId) {
+		return reqRepo.findAllByStudentId(studentId);
 	}
 
 

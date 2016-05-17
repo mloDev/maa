@@ -4,6 +4,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import lombok.Getter;
@@ -17,7 +21,7 @@ import lombok.Setter;
 public class Stada extends BaseEntity {
 
 	/** The student. */
-	@OneToOne
+	@Setter
 	private Student student;
 	
 	/** The institut. */
@@ -269,4 +273,17 @@ public class Stada extends BaseEntity {
 	 */
 	@Setter
 	private boolean USL;
+	
+	
+	/**
+	 * Gets the student.
+	 *
+	 * @return the student
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinTable(name = "student_stadas", joinColumns = { @JoinColumn(name = "stada_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "student_id", referencedColumnName = "id") })
+	public Student getStudent() {
+		return this.student;
+		
+	}
 }
