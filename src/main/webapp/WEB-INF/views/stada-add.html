@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Core CSS - Include with every page -->
+    <link type="text/css" rel="stylesheet" href="../../resources/css/bootstrap-3.1.1.min.css" 
+        data-th-href="@{/resources/css/bootstrap-3.1.1.min.css}" />
+        
+    <link type="text/css" rel="stylesheet" href="../../resources/font-awesome/css/font-awesome.css" 
+        data-th-href="@{/resources/font-awesome/css/font-awesome.css}" />
+
+    <!-- SB Admin CSS - Include with every page -->
+    <link type="text/css" rel="stylesheet" href="../../resources/css/sb-admin.css" 
+        data-th-href="@{/resources/css/sb-admin.css}" />
+    
+    <style>
+        .no-border-on-me>thead>tr>th,
+        .no-border-on-me>tbody>tr>th,
+        .no-border-on-me>tfoot>tr>th,
+        .no-border-on-me>thead>tr>td,
+        .no-border-on-me>tbody>tr>td,
+        .no-border-on-me>tfoot>tr>td
+        {
+            border-top-style: none;
+            border-bottom-style: none;
+        }
+    </style>
+    <style>
+        .dropdown-menu {
+          min-width: 0px;
+        }    
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <title data-th-text="#{user.list.page.title}">Title</title>
+</head>
+
+<body>
+
+<div id="wrapper">                
+<!-- /#wrapper -->
+
+		 <div th:replace="${session.fragmenttop} :: top-nav"></div>
+    	 <div th:replace="${session.fragmentvert} :: vert-nav"></div>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+        		<h4 class="page-header" data-th-text="#{stada.list.add.title}">Add Users</h4>
+				<form class="form" action="#" data-th-action="@{/stada/add}" data-th-object="${stadaDTO}" method="post">
+				<div class="table responsive">
+				<div class="col-lg-12">
+					<div class="col-sm-4">
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.title.label}">Title</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control"
+												data-th-value="*{title}" data-th-field="*{title}"></input>
+										</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.stadaNo.label}">StadaNo</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control"
+											data-th-value="*{stadaNo}" data-th-field="*{stadaNo}"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stadat.mart.label}">Mark</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control"
+											data-th-value="*{mark}" data-th-field="*{mark}"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.note.label}">Note</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control"
+												data-th-value="*{note}" data-th-field="*{note}"></input>
+										</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.matNo.label}">MatNo</label>
+										<div class="col-sm-7">
+											<select class="form-control" th:field="*{student.id}">
+                                      			<option th:each="student : ${allStudents}" th:value="${student.id}" th:text="${student.MatNo}">Dropdown</option>
+                                    		</select>
+										</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.employeeOne.label}">MatNo</label>
+										<div class="col-sm-7">
+											<select class="form-control" th:field="*{employeeOne.id}">
+                                      			<option th:each="employee : ${allEmployee}" th:value="${employee.id}" th:text="${employee.name}">Employee One</option>
+                                    		</select>
+										</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.employeeTwo.label}">MatNo</label>
+										<div class="col-sm-7">
+											<select class="form-control" th:field="*{employeeTwo.id}">
+                                      			<option th:each="employee : ${allEmployee}" th:value="${employee.id}" th:text="${employee.name}">Employee One</option>
+                                    		</select>
+										</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.start.label}">Start Date</label>
+										<div class="col-sm-7">
+											<input type="date" class="form-control"
+												data-th-value="*{start}" data-th-field="*{start}"></input>
+										</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.end.label}">End Date</label>
+										<div class="col-sm-7">
+											<input type="date" class="form-control"
+												data-th-value="*{end}" data-th-field="*{end}"></input>
+										</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.due.label}">Due Date</label>
+									<div class="col-sm-7">
+										<input type="date" class="form-control"
+											data-th-value="*{due}" data-th-field="*{due}"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.pause.label}">Pause Date</label>
+									<div class="col-sm-7">
+										<input type="date" class="form-control" pattern="dd.mm.yyyy"
+											data-th-value="*{pause}" data-th-field="*{pause}"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.ban.label}">Ban Date</label>
+									<div class="col-sm-7">
+										<input type="date" class="form-control"
+											data-th-value="*{ban}" data-th-field="*{ban}"></input>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label class="col-sm-8 control-label"
+										data-th-text="#{stada.isreleased.label}">Released</label>
+									<div class="col-sm-4">
+										<input type="checkbox" class="form-control"
+											data-th-value="*{released}" data-th-field="*{released}"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-8 control-label"
+										data-th-text="#{stada.ispublic.label}">Public</label>
+									<div class="col-sm-4">
+										<input type="checkbox" class="form-control"
+											data-th-value="*{madePublic}" data-th-field="*{madePublic}"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-8 control-label"
+										data-th-text="#{stada.usl.label}">USL</label>
+									<div class="col-sm-4">
+										<input type="checkbox" class="form-control"
+											data-th-value="*{USL}" data-th-field="*{USL}"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.institut.label}">Institut</label>
+										<div class="col-sm-7">
+											<select class="form-control" th:field="*{institut.id}">
+                                      			<option th:each="institut : ${allInstituts}" th:value="${institut.id}" th:text="${institut.name}">Institut</option>
+                                    		</select>
+										</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-5 control-label"
+										data-th-text="#{stada.examCategory.label}">Exam Category</label>
+										<div class="col-sm-7">
+											<select class="form-control" th:field="*{examCategory.id}">
+                                      			<option th:each="examCategory : ${allExamCategories}" th:value="${examCategory.id}" th:text="${examCategory.name}">Exam Category</option>
+                                    		</select>
+										</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-5 col-sm-7">
+									<button type="submit" class="btn btn-primary" name="action"
+										data-th-value="#{button.action.save}"
+										data-th-text="#{button.label.save}">Save</button>
+									<button type="submit" class="btn btn-default active"
+										name="action" data-th-value="#{button.action.cancel}"
+										data-th-text="#{button.label.cancel}">Cancel</button>
+								</div>
+							</div>
+							</div>
+							</div>
+				</form>
+
+            </div>  <!-- /.col-lg-12 -->				
+        </div>      <!-- /.row -->				
+    </div>		    <!-- page wrapper -->
+     <p style="text-align:center"> © 206 IPVS</p>
+</div>              <!-- /#wrapper -->
+
+        
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="../../resources/js/jquery-1.11.0.min.js" 
+        data-th-src="@{/resources/js/jquery-1.11.0.min.js}"></script>
+        
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="../../resources/js/bootstrap-3.1.1.min.js" 
+        data-th-src="@{/resources/js/bootstrap-3.1.1.min.js}"></script>
+
+    <!-- Core Scripts - Include with every page -->
+    <script type="text/javascript" src="../../resources/js/plugins/metisMenu/jquery.metisMenu.js" 
+        data-th-src="@{/resources/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+        
+    <!-- SB Admin Scripts - Include with every page -->
+    <script type="text/javascript" src="../../resources/js/sb-admin.js" 
+        data-th-src="@{/resources/js/sb-admin.js}"></script>
+
+</body>
+</html>

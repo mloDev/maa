@@ -45,16 +45,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import de.mlo.exception.DublicateStudentException;
+import de.mlo.exception.DuplicateReqException;
 import de.mlo.exception.DuplicateUserException;
 import de.mlo.exception.PermissionNotFoundException;
+import de.mlo.exception.ReqNotFoundException;
 import de.mlo.exception.StudentNotFoundException;
 import de.mlo.exception.UserNotFoundException;
 import de.mlo.model.Groupe;
 import de.mlo.model.Permission;
+import de.mlo.model.Req;
 import de.mlo.model.Student;
 import de.mlo.model.User;
+import de.mlo.model.requestCategory;
 import de.mlo.service.GroupeService;
 import de.mlo.service.ReqService;
+import de.mlo.service.StadaService;
 import de.mlo.service.StudentService;
 import de.mlo.service.UserService;
 import scala.annotation.meta.setter;
@@ -76,8 +81,11 @@ public class StudentController {
 											// messages
 
 	/** The student service. */
-											@Autowired
+	@Autowired
 	private StudentService studentService;
+											
+	@Autowired
+	private StadaService stadaService;
 
 	/** The message source. */
 	@Autowired
@@ -144,7 +152,8 @@ public class StudentController {
 						+ studentDTO.toString());
 				model.addAttribute("studentDTO", studentDTO);
 				model.addAttribute("studentReq", studentDTO.getReqList());
-				logger.debug("Student " + student.getId() + " with: " + studentDTO.getReqList().size() + " Reqs.");
+				model.addAttribute("studentStada", stadaService.getStadasByStudent(student));
+				logger.info("Student " + student.getId() + " with: " + studentDTO.getReqList().size() + " Reqs.");
 			}
 			return "student-edit";
 		} catch (StudentNotFoundException e) {
@@ -169,12 +178,13 @@ public class StudentController {
 	 * @throws DuplicateUserException the duplicate user exception
 	 * @throws DublicateStudentException the dublicate student exception
 	 * @throws StudentNotFoundException the student not found exception
+	 * @throws DuplicateReqException 
+	 * @throws ReqNotFoundException 
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public String editStudent(@Valid @ModelAttribute StudentDTO studentDTO,
 			BindingResult result, RedirectAttributes redirectAttrs,
-			@RequestParam(value = "action", required = true) String action) throws UserNotFoundException, DuplicateUserException, DublicateStudentException, StudentNotFoundException {
-		logger.info(result.toString());
+			@RequestParam(value = "action", required = true) String action) throws UserNotFoundException, DuplicateUserException, DublicateStudentException, StudentNotFoundException, ReqNotFoundException, DuplicateReqException {
 		if (action.equals(messageSource.getMessage("button.action.cancel",
 				null, Locale.US))) {
 			String message = messageSource.getMessage(
@@ -191,6 +201,8 @@ public class StudentController {
 		} else if (action.equals(messageSource.getMessage("button.action.save",
 				null, Locale.US))) {
 			logger.debug("Student/edit-POST:  " + studentDTO.toString());
+			studentDTO.setReqList(reqService.getReqsByStudent(studentDTO.getId()));
+			
 			Student student = getStudent(studentDTO);
 
 			logger.info("Student generated id: " + studentDTO.getId());
@@ -205,14 +217,29 @@ public class StudentController {
 		}
 		return "redirect:/student/edit?id=" + studentDTO.getId();
 	}
+	
+	@RequestMapping(value = {"/addRequest"}, method = RequestMethod.GET)
+	public String addRequest (@RequestParam(value = "id", required = true) Integer id,
+			Model model, RedirectAttributes redirectAttrs) {
+				return "redirect:/req/addRequest?id=" + id;
+		
+	}
+	
+	@RequestMapping(value = {"/addStada"}, method = RequestMethod.GET)
+	public String addStada (@RequestParam(value = "id", required = true) Integer id,
+			Model model, RedirectAttributes redirectAttrs) {
+				return "redirect:/stada/addStada?id=" + id;
+		
+	}
 
 	/**
 	 * Gets the student dto.
 	 *
 	 * @param student the student
 	 * @return the student dto
+	 * @throws StudentNotFoundException 
 	 */
-	private StudentDTO getStudentDTO(Student student) {
+	private StudentDTO getStudentDTO(Student student) throws StudentNotFoundException {
 		StudentDTO studentDTO = new StudentDTO();
 		studentDTO.setId(student.getId());
 		studentDTO.setMatNo(student.getMatNo());
@@ -229,7 +256,7 @@ public class StudentController {
 		studentDTO.setName(student.getName());
 		studentDTO.setSurName(student.getSurName());
 		studentDTO.setGender(student.getGender());
-		studentDTO.setReqList(reqService.getReqsByStudent(student));
+		studentDTO.setReqList(reqService.getReqsByStudent(student.getId()));
 		studentDTO.setLabel(student.getMatNo() + " " + student.getName() + " " + student.getSurName());
 		studentDTO.setArchivYear(student.getArchivYear());
 		studentDTO.setFs(student.getFs());
@@ -242,9 +269,15 @@ public class StudentController {
 	 *
 	 * @param studentDTO the student dto
 	 * @return the student
+	 * @throws StudentNotFoundException 
+	 * @throws DuplicateReqException 
+	 * @throws ReqNotFoundException 
 	 */
-	private Student getStudent(StudentDTO studentDTO) {
-		Student student = new Student(studentDTO.getMatNo(), studentDTO.getMatNoOld(), studentDTO.getName(), studentDTO.getSurName(), studentDTO.getEMail(), studentDTO.getGender(), studentDTO.getReqList());
+	private Student getStudent(StudentDTO studentDTO) throws StudentNotFoundException, ReqNotFoundException, DuplicateReqException {
+		Student student = new Student(studentDTO.getMatNo(), studentDTO.getMatNoOld(), studentDTO.getName(), studentDTO.getSurName(), studentDTO.getEMail(), studentDTO.getGender());
+
+		logger.info("befor student new: " + Integer.toString(studentDTO.getReqList().size()));
+		student.setReqList(reqService.getReqsByStudent(studentDTO.getId()));
 		student.setId(studentDTO.getId());
 		student.setArchived(studentDTO.isArchived());
 		student.setBirthName(studentDTO.getBirthName());

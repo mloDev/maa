@@ -2,11 +2,14 @@ package de.mlo.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -47,20 +50,11 @@ public class Req extends BaseEntity implements Serializable {
 	 * @param student the new student
 	 */
 	@Setter
+	@Getter
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinTable(name = "student_reqs", joinColumns = { @JoinColumn(name = "req_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "student_id", referencedColumnName = "id") })
 	private Student student;
 	
-	
-	/**
-	 * Gets the student.
-	 *
-	 * @return the student
-	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "student")
-	public Student getStudent() {
-		return this.student;
-		
-	}
 	
 
 }

@@ -58,7 +58,7 @@
         <div class="row">
             <div class="col-xs-12">
         		<h4 class="page-header" data-th-text="#{user.list.add.title}">Add Users</h4>
-				<form class="form" action="#" data-th-action="@{/req/add}" data-th-object="${reqDTO}" method="post">
+				<form class="form" action="#" data-th-action="@{/req/addRequest}" data-th-object="${reqDTO}" method="post">
 				<div class="table responsive">
 					<table class="no-border-on-me table ">
 						<tbody>
@@ -73,7 +73,7 @@
                              <tr>
                              	<th class="col-xs-3" data-th-text="#{user.list.groupe.label}">Groupe</th>
                                 <td>
-                                    <select class="form-control" th:field="*{studentId}">
+                                    <select class="form-control" th:field="*{student.id}">
                                       <option th:each="student : ${allStudents}" th:value="${student.id}" th:text="${student.MatNo}">Dropdown</option>
                                     </select>
                                 </td>

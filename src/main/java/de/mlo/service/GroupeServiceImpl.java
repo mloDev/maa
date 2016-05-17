@@ -57,7 +57,7 @@ public class GroupeServiceImpl implements GroupeService {
 	 */
 	@Override
 	public void updateGroupe(Groupe groupe) throws GroupeNotFoundException, DuplicateGroupeException {
-		groupeRepo.flush();
+		groupeRepo.saveAndFlush(groupe);
 		
 	}
 

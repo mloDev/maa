@@ -7,6 +7,8 @@ import de.mlo.model.Employee;
 /**
  * The Interface EmployeeRepository.
  */
-public interface EmployeeRepository extends JpaRepository<Employee, Long>{
+public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
+	
+	Employee getEmployeeByName(String employeeName);
 
 }

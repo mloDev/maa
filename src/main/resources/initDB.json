@@ -1082,4 +1082,40 @@
     "_class": "de.mlo.model.Groupe",
     "id": 16,
     "groupename": "USER"
-  }]
+  },
+     {
+    "_class": "de.mlo.model.Institut",
+    "id": 200001,
+    "name": "Institut für Parallele und Verteilte Systeme",
+    "shortName": "IPVS"
+  },
+       {
+    "_class": "de.mlo.model.Institut",
+    "id": 200001,
+    "name": "Institut für Formale Methoden der Informatik",
+    "shortName": "FMI"
+  },
+       {
+    "_class": "de.mlo.model.Institut",
+    "id": 200001,
+    "name": "Institut für Technische Informatik",
+    "shortName": "ITI"
+  },
+       {
+    "_class": "de.mlo.model.Institut",
+    "id": 200001,
+    "name": "Institut für Visualisierung und Interaktive Systeme",
+    "shortName": "VIS"
+  },
+       {
+    "_class": "de.mlo.model.Institut",
+    "id": 200001,
+    "name": "Institut für Softwaretechnologie",
+    "shortName": "ISTE"
+  },
+       {
+    "_class": "de.mlo.model.examCategory",
+    "id": 100001,
+    "name": "Schlüsselqualifikation, fachübergreifend"
+  }
+ ]

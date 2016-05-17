@@ -7,6 +7,7 @@ import de.mlo.model.Institut;
 /**
  * The Interface InstitutRepository.
  */
-public interface InstitutRepository extends JpaRepository<Institut, Long> {
+public interface InstitutRepository extends JpaRepository<Institut, Integer> {
+	Institut findInstitutByName(String insitutName);
 
 }

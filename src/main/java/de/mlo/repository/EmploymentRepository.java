@@ -7,6 +7,6 @@ import de.mlo.model.Employment;
 /**
  * The Interface EmploymentRepository.
  */
-public interface EmploymentRepository extends JpaRepository<Employment, Long> {
+public interface EmploymentRepository extends JpaRepository<Employment, Integer> {
 
 }

@@ -1,5 +1,6 @@
 package de.mlo.controller;
 
+import de.mlo.model.Student;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,7 +53,7 @@ public class ReqDTO {
 	 * @return the student id
 	 */
 	@Getter
-	private int studentId;
+	private Student student;
 
 
 }
