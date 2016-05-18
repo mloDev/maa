@@ -9,18 +9,14 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class Employment.
- */
 @Entity
-@Table(name="tbl_AngestelltenVerhaeltnisse")
-public class Employment{
+@Table(name="tbl_LehrVeranstaltungsArten")
+public class CourseCategory {
 	
 	/** The id. */
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "LVA_ID")
 	
 	/**
 	 * Gets the id.
@@ -37,41 +33,19 @@ public class Employment{
 	@Setter
 	private int id;
 	
-	/** The name. */
-	@Column
-	
-	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
+	@Column(name="LVA_Bez")
 	@Getter
-	
-	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
-	 */
 	@Setter
 	private String name;
 	
-	/** The desc. */
-	@Column
-	
-	/**
-	 * Gets the desc.
-	 *
-	 * @return the desc
-	 */
+	@Column(name="LVA_Info")
 	@Getter
-	
-	/**
-	 * Sets the desc.
-	 *
-	 * @param desc the new desc
-	 */
 	@Setter
-	private String desc;
-
+	private String info;
+	
+	@Column(name="LVA_LP")
+	@Getter
+	@Setter
+	private int lp;
 
 }

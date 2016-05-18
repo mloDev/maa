@@ -1,12 +1,37 @@
 package de.mlo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-public class Course extends BaseEntity {
+@Table(name="tbl_Vorlesungen")
+public class Course {
+	
+	/** The id. */
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	@Getter
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	@Setter
+	private int id;
 	
 	@Getter
 	@Setter

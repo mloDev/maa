@@ -10,13 +10,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tbl_Abteilungen")
-public class Department {
-
+@Table(name="tbl_Pruefungen")
+public class Exam {
 	/** The id. */
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "PRFG_ID")
 	
 	/**
 	 * Gets the id.
@@ -33,11 +32,5 @@ public class Department {
 	@Setter
 	private int id;
 	
-	@Getter
-	@Setter
-	private String name;
-	
-	@Getter
-	@Setter
-	private String acronym;
+
 }

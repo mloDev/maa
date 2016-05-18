@@ -4,23 +4,20 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class Employment.
- */
 @Entity
-@Table(name="tbl_AngestelltenVerhaeltnisse")
-public class Employment{
+@Table(name="tbl_LehrVeranstaltungsNamen")
+public class CourseName {
 	
 	/** The id. */
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "LVN_ID")
 	
 	/**
 	 * Gets the id.
@@ -37,41 +34,15 @@ public class Employment{
 	@Setter
 	private int id;
 	
-	/** The name. */
-	@Column
-	
-	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
+	@Column(name="LVN_Bez")
 	@Getter
-	
-	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
-	 */
 	@Setter
 	private String name;
 	
-	/** The desc. */
-	@Column
-	
-	/**
-	 * Gets the desc.
-	 *
-	 * @return the desc
-	 */
+	@OneToOne
 	@Getter
-	
-	/**
-	 * Sets the desc.
-	 *
-	 * @param desc the new desc
-	 */
 	@Setter
-	private String desc;
+	private CourseCategory category;
 
 
 }

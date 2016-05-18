@@ -5,10 +5,13 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +21,28 @@ import lombok.Setter;
  * The Class Stada.
  */
 @Entity
-public class Stada extends BaseEntity {
+@Table(name="tbl_StADAs")
+public class Stada {
+	
+	/** The id. */
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	@Getter
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	@Setter
+	private int id;
 
 	/** The student. */
 	@Setter

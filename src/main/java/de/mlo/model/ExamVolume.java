@@ -9,18 +9,14 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class Restrictions.
- */
 @Entity
-@Table(name="tbl_Auflagen")
-public class Restrictions {
+@Table(name="tbl_PrfgsUmfang")
+public class ExamVolume {
 	
 	/** The id. */
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "STD_ID")
 	
 	/**
 	 * Gets the id.
@@ -36,23 +32,15 @@ public class Restrictions {
 	 */
 	@Setter
 	private int id;
-
-	/** The restrictions category. */
-	@Column
 	
-	/**
-	 * Gets the restrictions category.
-	 *
-	 * @return the restrictions category
-	 */
+	@Column(name="STD_SWS")
 	@Getter
-	
-	/**
-	 * Sets the restrictions category.
-	 *
-	 * @param restrictionsCategory the new restrictions category
-	 */
 	@Setter
-	private String restrictionsCategory;
+	private String stdSws;
 	
+	@Column(name="STD_SWS_Anzahl")
+	@Getter
+	@Setter
+	private int stdSwsAnzahl;
+
 }

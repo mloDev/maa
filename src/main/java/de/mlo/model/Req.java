@@ -5,9 +5,13 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,11 +20,31 @@ import lombok.Setter;
  * The Class Req.
  */
 @Entity
-public class Req extends BaseEntity implements Serializable {
+@Table(name = "tbl_PruefungsAusschuss")
+public class Req implements Serializable {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8115733602274019649L;
 
+	/** The id. */
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	@Getter
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	@Setter
+	private int id;
 
 
 	/** The name. */

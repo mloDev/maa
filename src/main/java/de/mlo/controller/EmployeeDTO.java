@@ -10,6 +10,11 @@ import lombok.Setter;
 
 public class EmployeeDTO extends UserDTO {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1450008427418240366L;
+
 	@Getter
 	@Setter
 	private String label;
