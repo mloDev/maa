@@ -8,12 +8,16 @@ import de.mlo.model.Title;
 import lombok.Getter;
 import lombok.Setter;
 
-public class EmployeeDTO extends UserDTO {
+public class EmployeeDTO {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1450008427418240366L;
+	
+	@Getter
+	@Setter
+	private int id;
 
 	@Getter
 	@Setter
@@ -49,6 +53,10 @@ public class EmployeeDTO extends UserDTO {
 	
 	@Getter
 	@Setter
+	private String telShort;
+	
+	@Getter
+	@Setter
 	private String mobilNo;
 	
 	@Getter
@@ -61,7 +69,7 @@ public class EmployeeDTO extends UserDTO {
 	
 	@Getter
 	@Setter
-	private String priveMail;
+	private String privEMail;
 	
 	@Getter
 	@Setter

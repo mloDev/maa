@@ -1142,5 +1142,11 @@
     "name": "Manuel",
     "surName": "Lorenz",
     "eMail": "mitarbeiter1@uni.de"
+  },
+   {
+    "_class": "de.mlo.model.PLZCity",
+    "id": 300001,
+    "plz": "70188",
+    "city": "Stuttgart"
   }
  ]

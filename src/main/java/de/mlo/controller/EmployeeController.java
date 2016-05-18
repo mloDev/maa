@@ -26,6 +26,7 @@ import de.mlo.exception.EmployeeNotFoundException;
 import de.mlo.model.Employee;
 import de.mlo.model.Groupe;
 import de.mlo.model.Institut;
+import de.mlo.repository.PLZCityRepository;
 import de.mlo.service.EmployeeService;
 import de.mlo.service.InstitutService;
 
@@ -52,7 +53,9 @@ public class EmployeeController {
 	/** The employee service. */
 	@Autowired
 	private EmployeeService empService;
-
+	
+	@Autowired
+	private PLZCityRepository plzRepo;
 	/** The message source. */
 	@Autowired
 	private MessageSource messageSource;
@@ -117,10 +120,10 @@ public class EmployeeController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('CTRL_USER_ADD_GET')")
 	public String addemployeepage(@Valid @ModelAttribute EmployeeDTO employeeDTO,
-			BindingResult result, RedirectAttributes redirectAttrs) {
+			Model model, BindingResult result, RedirectAttributes redirectAttrs) {
 
 		logger.debug("IN: Employee/add-GET");
-
+		model.addAttribute("allPlzCity", plzRepo.findAll());
 		return "employee-add";
 
 	}
@@ -142,7 +145,7 @@ public class EmployeeController {
 		logger.debug("IN: Employee/add-POST");
 
 		if (result.hasErrors()) {
-			logger.debug("EmployeeDTO add error: " + result.toString());
+			logger.info("EmployeeDTO add error: " + result.toString());
 			redirectAttrs.addFlashAttribute(
 					"org.springframework.validation.BindingResult.employeeDTO",
 					result);
@@ -336,8 +339,8 @@ public class EmployeeController {
 		EmployeeDTO employeeDTO = new EmployeeDTO();
 		employeeDTO.setAllowExam(employee.isAllowExam());
 		employeeDTO.setName(employee.getName());
-		employeeDTO.setEmail(employee.getEMail());
-		employeeDTO.setPriveMail(employee.getPrivEMail());
+		employeeDTO.setEMail(employee.getEMail());
+		employeeDTO.setPrivEMail(employee.getPrivEMail());
 		employeeDTO.setLabel(employee.getTitle() + " " + employee.getName() + " " +  employee.getSurName());
 		return employeeDTO;
 	}
@@ -352,8 +355,8 @@ public class EmployeeController {
 	public Employee getEmployee(EmployeeDTO employeeDTO) {
 		Employee employee = new Employee();
 		employee.setAllowExam(employeeDTO.isAllowExam());
-		employee.setEMail(employeeDTO.getEmail());
-		employee.setPrivEMail(employeeDTO.getPriveMail());
+		employee.setEMail(employeeDTO.getEMail());
+		employee.setPrivEMail(employeeDTO.getPrivEMail());
 		employee.setName(employeeDTO.getName());
 		employee.setSurName(employeeDTO.getSurName());
 		employee.setStreet(employeeDTO.getStreet());

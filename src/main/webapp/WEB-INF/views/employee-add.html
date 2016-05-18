@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Core CSS - Include with every page -->
+    <link type="text/css" rel="stylesheet" href="../../resources/css/bootstrap-3.1.1.min.css" 
+        data-th-href="@{/resources/css/bootstrap-3.1.1.min.css}" />
+        
+    <link type="text/css" rel="stylesheet" href="../../resources/font-awesome/css/font-awesome.css" 
+        data-th-href="@{/resources/font-awesome/css/font-awesome.css}" />
+
+    <!-- SB Admin CSS - Include with every page -->
+    <link type="text/css" rel="stylesheet" href="../../resources/css/sb-admin.css" 
+        data-th-href="@{/resources/css/sb-admin.css}" />
+    
+    <style>
+        .no-border-on-me>thead>tr>th,
+        .no-border-on-me>tbody>tr>th,
+        .no-border-on-me>tfoot>tr>th,
+        .no-border-on-me>thead>tr>td,
+        .no-border-on-me>tbody>tr>td,
+        .no-border-on-me>tfoot>tr>td
+        {
+            border-top-style: none;
+            border-bottom-style: none;
+        }
+    </style>
+    <style>
+        .dropdown-menu {
+          min-width: 0px;
+        }    
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <title data-th-text="#{employee.list.page.title}">Title</title>
+</head>
+
+<body>
+
+<div id="wrapper">                
+<!-- /#wrapper -->
+
+		 <div th:replace="${session.fragmenttop} :: top-nav"></div>
+    	 <div th:replace="${session.fragmentvert} :: vert-nav"></div>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+        		<h4 class="page-header" data-th-text="#{employee.list.add.title}">Add Employees</h4>
+				<form class="form" action="#" data-th-action="@{/employee/add}" data-th-object="${employeeDTO}" method="post">
+				<div class="table responsive">
+					<table class="no-border-on-me table ">
+						<tbody>
+							<tr>
+								<th class="col-xs-1"></th>
+								<td><input type="text" hidden="hidden" data-th-field="*{id}"></input></td>
+							</tr>
+							<tr>
+								<th class="col-xs-3" data-th-text="#{employee.list.employee.label}">Employeename</th>
+								<td><input class="form-control" type="text"	data-th-field="*{name}" placeholder="Employeename"></input></td>
+							</tr>
+							<tr>
+								<th class="col-xs-2" data-th-text="#{employee.list.surName.label}">SurName</th>
+                                <td><input class="form-control" type="text" data-th-field="*{surName}" placeholder="SurName"></input></td>
+                            </tr>
+                            <tr>
+								<th class="col-xs-2" data-th-text="#{employee.list.gender.label}">Gender</th>
+                                <td><input class="form-control" type="text" data-th-field="*{gender}" placeholder="Gender"></input></td>
+                            </tr>
+                            <tr>
+								<th class="col-xs-2" data-th-text="#{employee.list.telNo.label}">telNo</th>
+                                <td><input class="form-control" type="text" data-th-field="*{telNo}" placeholder="Phonenumber"></input></td>
+                            </tr>
+                             <tr>
+								<th class="col-xs-2" data-th-text="#{employee.list.telFax.label}">telFax</th>
+                                <td><input class="form-control" type="text" data-th-field="*{telFax}" placeholder="telFax"></input></td>
+                            </tr>
+                            <tr>
+								<th class="col-xs-2" data-th-text="#{employee.list.telShort.label}">telShort</th>
+                                <td><input class="form-control" type="text" data-th-field="*{telShort}" placeholder="telShort"></input></td>
+                            </tr>
+                            <tr>
+								<th class="col-xs-2" data-th-text="#{employee.list.privTel.label}">privTel</th>
+                                <td><input class="form-control" type="text" data-th-field="*{privTel}" placeholder="privTel"></input></td>
+                            </tr>
+                            <tr>
+								<th class="col-xs-2" data-th-text="#{employee.list.privFax.label}">privFax</th>
+                                <td><input class="form-control" type="text" data-th-field="*{privFax}" placeholder="privFax"></input></td>
+                            </tr>
+                            <tr>
+								<th class="col-xs-2" data-th-text="#{employee.list.mobilNo.label}">mobileNo</th>
+                                <td><input class="form-control" type="text" data-th-field="*{mobilNo}" placeholder="mobilNo"></input></td>
+                            </tr>
+                                                         <tr>
+								<th class="col-xs-2" data-th-text="#{employee.list.eMail.label}">Email</th>
+                                <td><input class="form-control" type="text" data-th-field="*{eMail}" placeholder="eMail"></input></td>
+                            </tr>
+                            <tr>
+								<th class="col-xs-2" data-th-text="#{employee.list.privEMail.label}">privEmail</th>
+                                <td><input class="form-control" type="text" data-th-field="*{privEMail}" placeholder="privEMail"></input></td>
+                            </tr>
+                            <tr>
+								<th class="col-xs-2" data-th-text="#{employee.list.homepage.label}">homepage</th>
+                                <td><input class="form-control" type="text" data-th-field="*{homepage}" placeholder="homepage"></input></td>
+                            </tr>
+                            <tr>
+								<th class="col-xs-2" data-th-text="#{employee.list.lvvo.label}">lvvo</th>
+                                <td><input class="form-control" type="text" data-th-field="*{lvvo}" placeholder="lvvo"></input></td>
+                            </tr>
+                            <tr>
+                            <th class="col-xs-2" data-th-text="#{employee.list.institut.label}">Institut</th>
+                                <td>
+                                    <select class="form-control" th:field="*{institut.id}">
+                                      <option th:each="institut : ${allInstituts}" th:value="${institut.id}" th:text="${institut.name}">Dropdown</option>
+                                    </select>
+                                </td>
+                             </tr>
+                             <tr>
+                             <th class="col-xs-2" data-th-text="#{employee.list.plzCiy.label}">PLZCity</th>
+                                <td>
+                                    <select class="form-control" th:field="*{plzCity.id}">
+                                      <option th:each="plzCity : ${allPlzCity}" th:value="${plzCity.id}" th:text="${plzCity.plz} + ${plzCity.city}">Dropdown</option>
+                                    </select>
+                                </td>
+                             </tr>
+                             <tr>
+                             	<th class="col-xs-1" data-th-text="#{employee.list.actions.label}">Action</th>
+								<td>
+									<button type="submit" class="btn btn-primary" data-th-text="#{button.label.add}">Add Employee</button>
+								</td>
+							 </tr>
+						</tbody>
+					</table>
+				</div>
+				</form>
+
+            </div>  <!-- /.col-lg-12 -->				
+        </div>      <!-- /.row -->				
+    </div>		    <!-- page wrapper -->
+     <p style="text-align:center"> © 2016 IPVS</p>
+</div>              <!-- /#wrapper -->
+
+        
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="../../resources/js/jquery-1.11.0.min.js" 
+        data-th-src="@{/resources/js/jquery-1.11.0.min.js}"></script>
+        
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="../../resources/js/bootstrap-3.1.1.min.js" 
+        data-th-src="@{/resources/js/bootstrap-3.1.1.min.js}"></script>
+
+    <!-- Core Scripts - Include with every page -->
+    <script type="text/javascript" src="../../resources/js/plugins/metisMenu/jquery.metisMenu.js" 
+        data-th-src="@{/resources/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+        
+    <!-- SB Admin Scripts - Include with every page -->
+    <script type="text/javascript" src="../../resources/js/sb-admin.js" 
+        data-th-src="@{/resources/js/sb-admin.js}"></script>
+
+</body>
+</html>
