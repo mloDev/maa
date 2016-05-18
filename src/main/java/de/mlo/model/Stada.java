@@ -46,14 +46,21 @@ public class Stada {
 
 	/** The student. */
 	@Setter
+	@Getter
+	@ManyToOne
+	@JoinTable(name = "student_stadas")
 	private Student student;
 	
 	/** The institut. */
 	@OneToOne
+	@Getter
+	@Setter
 	private Institut institut;
 	
 	/** The exam category. */
 	@OneToOne
+	@Getter
+	@Setter
 	private examCategory examCategory;
 	
 	/** The mark. */
@@ -76,10 +83,14 @@ public class Stada {
 	
 	/** The employee one. */
 	@OneToOne
+	@Getter
+	@Setter
 	private Employee employeeOne;
 	
 	/** The employee two. */
 	@OneToOne
+	@Getter
+	@Setter
 	private Employee employeeTwo;
 	
 	/** The start. */
@@ -297,17 +308,4 @@ public class Stada {
 	 */
 	@Setter
 	private boolean USL;
-	
-	
-	/**
-	 * Gets the student.
-	 *
-	 * @return the student
-	 */
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinTable(name = "student_stadas", joinColumns = { @JoinColumn(name = "stada_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "student_id", referencedColumnName = "id") })
-	public Student getStudent() {
-		return this.student;
-		
-	}
 }

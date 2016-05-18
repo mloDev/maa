@@ -388,9 +388,7 @@ public class Student implements Serializable {
 	
 	
 	/** The req list. */
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "student_reqs", joinColumns = { @JoinColumn(name = "student_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "req_id", referencedColumnName = "id") })
-	 
+	@OneToMany(mappedBy ="student") 
 	/**
 	 * Gets the req list.
 	 *
@@ -406,8 +404,7 @@ public class Student implements Serializable {
 	@Setter
 	private List<Req> reqList;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "student_id")
+	@OneToMany(mappedBy ="student")  
 	@Getter
 	@Setter
 	private List<Stada> stadaList;
