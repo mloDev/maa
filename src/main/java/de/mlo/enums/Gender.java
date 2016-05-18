@@ -13,5 +13,9 @@ public enum Gender {
  /** The Male. */
  Male, 
  /** The Female. */
- Female
+ Female,
+ f,
+ m,
+ M,
+ F
 }

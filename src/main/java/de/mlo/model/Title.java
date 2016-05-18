@@ -2,6 +2,9 @@ package de.mlo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,10 +14,31 @@ import lombok.Setter;
  * The Class Title.
  */
 @Entity
-public class Title extends BaseEntity {
+@Table(name="tbl_AkademischeGrad")
+public class Title {
+	
+	/** The id. */
+	@Id
+	@GeneratedValue
+	@Column(name = "AG_ID")
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	@Getter
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	@Setter
+	private int id;
 	
 	/** The title. */
-	@Column
+	@Column(name="AG_Name")
 	
 	/**
 	 * Sets the title.
@@ -29,7 +53,7 @@ public class Title extends BaseEntity {
 	 * @return the title
 	 */
 	@Getter
-	private String title;
+	private String name;
 	
 	/** The degrade. */
 	@Column

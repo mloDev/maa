@@ -1,15 +1,22 @@
 package de.mlo.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,10 +24,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import de.mlo.exception.DuplicateReqException;
+import de.mlo.exception.EmployeeNotFoundException;
 import de.mlo.exception.StudentNotFoundException;
 import de.mlo.model.Employee;
 import de.mlo.model.Institut;
-import de.mlo.model.Req;
 import de.mlo.model.Stada;
 import de.mlo.model.Student;
 import de.mlo.model.examCategory;
@@ -33,9 +40,25 @@ import de.mlo.service.StudentService;
 @Controller
 @RequestMapping(value = {"/stada"})
 public class StadaController {
+	
+	/**
+	 * Inits the binder.
+	 *
+	 * @param binder the binder
+	 */
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true);
+        binder.registerCustomEditor(Date.class, editor);
+    }
 
+	/** The logger. */
+	static Logger logger = LoggerFactory
+			.getLogger(StadaController.class);
+	
+	
 	/** The business object. */
-	static String businessObject = "req"; // used in RedirectAttributes
+	static String businessObject = "stada"; // used in RedirectAttributes
 											// messages
 
 	/** The message source. */
@@ -110,12 +133,12 @@ public class StadaController {
 	public String addStada(@Valid @ModelAttribute StadaDTO stadaDTO,
 			BindingResult result, RedirectAttributes redirectAttrs) throws Exception {
 
-
 		if (result.hasErrors()) {
 			redirectAttrs.addFlashAttribute(
 					"org.springframework.validation.BindingResult.stadaDTO",
 					result);
 			redirectAttrs.addFlashAttribute("stadaDTO", stadaDTO);
+			logger.info("StadaDTO add error: " + result.toString());
 			return "redirect:/stada/list";
 		} else {
 			Stada stada = new Stada();
@@ -151,11 +174,13 @@ public class StadaController {
 					"org.springframework.validation.BindingResult.stadaDTO",
 					result);
 			redirectAttrs.addFlashAttribute("stadaDTO", stadaDTO);
+			logger.info("StadaDTO add error: " + result.toString());
 			return "redirect:/student/list";
 		} else {
 			Stada stada = new Stada();
 			stada = getStada(stadaDTO);
 			stadaService.addStada(stada);
+			logger.info("StadaDTO add error: ");
 			String message = messageSource
 					.getMessage("ctrl.message.success.add", new Object[] {
 							businessObject, stada.getTitle() }, Locale.US);
@@ -165,12 +190,16 @@ public class StadaController {
 	}
 	
 
-	private Stada getStada(StadaDTO stadaDTO) throws StudentNotFoundException {
+	private Stada getStada(StadaDTO stadaDTO) throws StudentNotFoundException, EmployeeNotFoundException {
 		Stada stada = new Stada();
 		stada.setTitle(stadaDTO.getTitle());
-		stada.setId(stadaDTO.getId());
 		stada.setMark(stadaDTO.getMark());
+		stada.setEnd(stadaDTO.getEnd());
+		stada.setStart(stadaDTO.getStart());
+		stada.setStadaNo(stadaDTO.getStadaNo());
+		stada.setExamCategory(examCatRepo.getOne(stadaDTO.getExamCategory().getId()));;
 		stada.setStudent(studentService.getStudent(stadaDTO.getStudent().getId()));
+		stada.setEmployeeOne(empService.getEmployee(stadaDTO.getEmployeeOne().getId()));
 		return stada;
 	}
 }

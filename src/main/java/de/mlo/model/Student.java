@@ -20,8 +20,8 @@ import lombok.Setter;
  * The Class Student.
  */
 @Entity
-@Table(name = "students")
-public class Student extends BaseEntity implements Serializable {
+@Table(name = "tbl_Studenten")
+public class Student implements Serializable {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2504308260829915442L;
@@ -53,6 +53,27 @@ public class Student extends BaseEntity implements Serializable {
 		this.eMail = eMail;
 		this.gender = gender;
 	}
+	
+	
+	/** The id. */
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	@Getter
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	@Setter
+	private int id;
 	
 	/** The mat no. */
 	@Column
@@ -367,9 +388,7 @@ public class Student extends BaseEntity implements Serializable {
 	
 	
 	/** The req list. */
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "student_reqs", joinColumns = { @JoinColumn(name = "student_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "req_id", referencedColumnName = "id") })
-	 
+	@OneToMany(mappedBy ="student") 
 	/**
 	 * Gets the req list.
 	 *
@@ -385,8 +404,7 @@ public class Student extends BaseEntity implements Serializable {
 	@Setter
 	private List<Req> reqList;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "student_id")
+	@OneToMany(mappedBy ="student")  
 	@Getter
 	@Setter
 	private List<Stada> stadaList;

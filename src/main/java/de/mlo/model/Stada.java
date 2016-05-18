@@ -5,10 +5,13 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,18 +21,46 @@ import lombok.Setter;
  * The Class Stada.
  */
 @Entity
-public class Stada extends BaseEntity {
+@Table(name="tbl_StADAs")
+public class Stada {
+	
+	/** The id. */
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	@Getter
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	@Setter
+	private int id;
 
 	/** The student. */
 	@Setter
+	@Getter
+	@ManyToOne
+	@JoinTable(name = "student_stadas")
 	private Student student;
 	
 	/** The institut. */
 	@OneToOne
+	@Getter
+	@Setter
 	private Institut institut;
 	
 	/** The exam category. */
 	@OneToOne
+	@Getter
+	@Setter
 	private examCategory examCategory;
 	
 	/** The mark. */
@@ -52,10 +83,14 @@ public class Stada extends BaseEntity {
 	
 	/** The employee one. */
 	@OneToOne
+	@Getter
+	@Setter
 	private Employee employeeOne;
 	
 	/** The employee two. */
 	@OneToOne
+	@Getter
+	@Setter
 	private Employee employeeTwo;
 	
 	/** The start. */
@@ -273,17 +308,4 @@ public class Stada extends BaseEntity {
 	 */
 	@Setter
 	private boolean USL;
-	
-	
-	/**
-	 * Gets the student.
-	 *
-	 * @return the student
-	 */
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinTable(name = "student_stadas", joinColumns = { @JoinColumn(name = "stada_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "student_id", referencedColumnName = "id") })
-	public Student getStudent() {
-		return this.student;
-		
-	}
 }

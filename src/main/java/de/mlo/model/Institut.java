@@ -3,7 +3,10 @@ package de.mlo.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +16,27 @@ import lombok.Setter;
  * The Class Institut.
  */
 @Entity
-public class Institut extends BaseEntity {
+@Table(name="tbl_Institut")
+public class Institut {
+	/** The id. */
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	@Getter
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	@Setter
+	private int id;
 	
 	/** The name. */
 	@Column

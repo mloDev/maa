@@ -1113,9 +1113,34 @@
     "name": "Institut für Softwaretechnologie",
     "shortName": "ISTE"
   },
+    {
+    "_class": "de.mlo.model.Groupe",
+    "id": 18,
+    "groupename": "ADMIN"
+  },
+  {
+  "_class": "de.mlo.model.User",
+  "username": "admin",
+  "groupe":     {
+    "_class": "de.mlo.model.Groupe",
+    "id": 18,
+    "groupename": "ADMIN"
+  },
+  "phone": "01755678253",
+  "enabled": true,
+  "email":"lorenz.swt@gmail.com",
+  "password": "21232f297a57a5a743894a0e4a801fc3"
+  },
+
        {
     "_class": "de.mlo.model.examCategory",
     "id": 100001,
     "name": "Schlüsselqualifikation, fachübergreifend"
+  },        {
+    "_class": "de.mlo.model.Employee",
+    "id": 100001,
+    "name": "Manuel",
+    "surName": "Lorenz",
+    "eMail": "mitarbeiter1@uni.de"
   }
  ]

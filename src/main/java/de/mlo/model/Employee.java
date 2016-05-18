@@ -4,7 +4,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import de.mlo.enums.Gender;
 import lombok.Getter;
@@ -15,10 +18,30 @@ import lombok.Setter;
  * The Class Employee.
  */
 @Entity
-public class Employee extends BaseEntity {
+@Table(name="tbl_IvIMit")
+public class Employee {
+	/** The id. */
+	@Id
+	@GeneratedValue
+	@Column(name = "IvIMit_ID")
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	@Getter
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	@Setter
+	private int id;
 	
 	/** The name. */
-	@Column
+	@Column(name = "IvIMit_Name")
 	
 	/**
 	 * Gets the name.
@@ -36,7 +59,7 @@ public class Employee extends BaseEntity {
 	private String name;
 	
 	/** The sur name. */
-	@Column(nullable = true)
+	@Column(name = "IvIMit_Vorname", nullable = true)
 	
 	/**
 	 * Gets the sur name.
@@ -54,7 +77,7 @@ public class Employee extends BaseEntity {
 	private String surName;
 	
 	/** The gender. */
-	@Column(nullable = true)
+	@Column(name="IvIMit_Geschlecht", nullable = true)
 	
 	/**
 	 * Gets the gender.
@@ -87,7 +110,7 @@ public class Employee extends BaseEntity {
 	 * @param telNo the new tel no
 	 */
 	@Setter
-	private int telNo;
+	private String telNo;
 	
 	/** The tel fax. */
 	@Column(nullable = true)
@@ -141,7 +164,7 @@ public class Employee extends BaseEntity {
 	 * @param privTel the new priv tel
 	 */
 	@Setter
-	private int privTel;
+	private String privTel;
 	
 	/** The priv fax. */
 	@Column(nullable = true)
@@ -159,7 +182,7 @@ public class Employee extends BaseEntity {
 	 * @param privFax the new priv fax
 	 */
 	@Setter
-	private int privFax;
+	private String privFax;
 	
 	/** The mobil no. */
 	@Column(nullable = true)
@@ -177,7 +200,7 @@ public class Employee extends BaseEntity {
 	 * @param mobilNo the new mobil no
 	 */
 	@Setter
-	private int mobilNo;
+	private String mobilNo;
 	
 	/** The allow exam. */
 	@Column(nullable = true)
@@ -359,6 +382,9 @@ public class Employee extends BaseEntity {
 	@Setter
 	private int lvvo;
 	
-	
+	@Column
+	@Getter
+	@Setter
+	private boolean archived;
 
 }

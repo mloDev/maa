@@ -43,7 +43,7 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-    <title data-th-text="#{user.list.page.title}">Title</title>
+    <title data-th-text="#{stada.add.page.title}">Title</title>
 </head>
 
 <body>
@@ -57,8 +57,8 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-        		<h4 class="page-header" data-th-text="#{stada.list.add.title}">Add Users</h4>
-				<form class="form" action="#" data-th-action="@{/stada/add}" data-th-object="${stadaDTO}" method="post">
+        		<h4 class="page-header" data-th-text="#{stada.list.add.title}">Add Stada</h4>
+				<form class="form" action="#" data-th-action="@{/stada/addStada}" data-th-object="${stadaDTO}" method="post">
 				<div class="table responsive">
 				<div class="col-lg-12">
 					<div class="col-sm-4">
@@ -68,6 +68,7 @@
 										<div class="col-sm-7">
 											<input type="text" class="form-control"
 												data-th-value="*{title}" data-th-field="*{title}"></input>
+												<input type="text" hidden="hidden" data-th-field="*{id}"></input>
 										</div>
 								</div>
 								<div class="form-group">
@@ -108,6 +109,7 @@
 										data-th-text="#{stada.employeeOne.label}">MatNo</label>
 										<div class="col-sm-7">
 											<select class="form-control" th:field="*{employeeOne.id}">
+												<option th:value="0" text="Please Select"></option>
                                       			<option th:each="employee : ${allEmployee}" th:value="${employee.id}" th:text="${employee.name}">Employee One</option>
                                     		</select>
 										</div>
@@ -117,6 +119,7 @@
 										data-th-text="#{stada.employeeTwo.label}">MatNo</label>
 										<div class="col-sm-7">
 											<select class="form-control" th:field="*{employeeTwo.id}">
+												<option th:value="0" text="Please Select"></option>
                                       			<option th:each="employee : ${allEmployee}" th:value="${employee.id}" th:text="${employee.name}">Employee One</option>
                                     		</select>
 										</div>
@@ -194,6 +197,7 @@
 										data-th-text="#{stada.institut.label}">Institut</label>
 										<div class="col-sm-7">
 											<select class="form-control" th:field="*{institut.id}">
+												<option th:value="0" text="Please Select"></option>
                                       			<option th:each="institut : ${allInstituts}" th:value="${institut.id}" th:text="${institut.name}">Institut</option>
                                     		</select>
 										</div>
@@ -203,6 +207,7 @@
 										data-th-text="#{stada.examCategory.label}">Exam Category</label>
 										<div class="col-sm-7">
 											<select class="form-control" th:field="*{examCategory.id}">
+												<option th:value="0" text="Please Select"></option>
                                       			<option th:each="examCategory : ${allExamCategories}" th:value="${examCategory.id}" th:text="${examCategory.name}">Exam Category</option>
                                     		</select>
 										</div>
@@ -210,12 +215,7 @@
 							</div>
 							<div class="form-group">
 								<div class="col-sm-offset-5 col-sm-7">
-									<button type="submit" class="btn btn-primary" name="action"
-										data-th-value="#{button.action.save}"
-										data-th-text="#{button.label.save}">Save</button>
-									<button type="submit" class="btn btn-default active"
-										name="action" data-th-value="#{button.action.cancel}"
-										data-th-text="#{button.label.cancel}">Cancel</button>
+									<button type="submit" class="btn btn-primary" data-th-text="#{button.label.add}">Add Stada</button>
 								</div>
 							</div>
 							</div>
@@ -225,7 +225,7 @@
             </div>  <!-- /.col-lg-12 -->				
         </div>      <!-- /.row -->				
     </div>		    <!-- page wrapper -->
-     <p style="text-align:center"> © 206 IPVS</p>
+     <p style="text-align:center"> © 2016 IPVS</p>
 </div>              <!-- /#wrapper -->
 
         

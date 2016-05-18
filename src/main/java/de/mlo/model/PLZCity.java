@@ -2,6 +2,9 @@ package de.mlo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,10 +14,31 @@ import lombok.Setter;
  * The Class PLZCity.
  */
 @Entity
-public class PLZCity extends BaseEntity {
+@Table(name = "tbl_PLZ")
+public class PLZCity {
+	
+	/** The id. */
+	@Id
+	@GeneratedValue
+	@Column(name = "PLZ_ID")
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	@Getter
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	@Setter
+	private int id;
 	
 	/** The plz. */
-	@Column(nullable = true)
+	@Column(name = "PLZ_PLZ", nullable = true)
 	
 	/**
 	 * Gets the plz.
@@ -32,7 +56,7 @@ public class PLZCity extends BaseEntity {
 	private String plz;
 	
 	/** The city. */
-	@Column(nullable = true)
+	@Column(name = "PLZ_Ort", nullable = true)
 	
 	/**
 	 * Gets the city.

@@ -107,15 +107,19 @@
 			<div class="sidebar-collapse">
 				<ul class="nav" id="side-menu">
 					<li
-						th:class="${(#httpServletRequest.requestURL.toString().contains('student'))} ? 'active'">
+						th:class="${(#httpServletRequest.requestURL.toString().contains('student'))} or
+                                    ${(#httpServletRequest.requestURL.toString().contains('stada'))} or
+                                    ${(#httpServletRequest.requestURL.toString().contains('req'))} or
+                                    ${(#httpServletRequest.requestURL.toString().contains('employee'))} or
+                                    ${(#httpServletRequest.requestURL.toString().contains('report'))} ? 'active'">
 						<a href="#" data-th-href="@{/student/list}"><i
 							class="fa fa-lock fa-fw"></i> Administration<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li><a href="#" data-th-href="@{/student/list}">Student List</a></li>
 							<li><a href="#" data-th-href="@{/req/list}">Req List</a></li>
-							<li><a href="#" data-th-href="@{/req/add}">Req add</a></li>
 							<li><a href="#" data-th-href="@{/report/list}">Report List</a></li>
-							<li><a href="#" data-th-href="@{/stada/add}">Stada add</a></li>
+							<li><a href="#" data-th-href="@{/employee/list}">Employee List</a></li>
+							<li><a href="#" data-th-href="@{/employee/add}">Employee add</a></li>
 						</ul> <!-- /.nav-second-level -->
 					</li>
 				
@@ -132,18 +136,6 @@
 									List</a></li>
 							<li><a href="#" data-th-href="@{/permission/list}">Permission
 									List</a></li>
-						</ul> <!-- /.nav-second-level -->
-					</li>
-					<li
-						th:class="${(#httpServletRequest.requestURL.toString().contains('event'))} ? 'active'">
-						<a href="/event"><i class="fa fa-gears fa-fw"></i> Events<span
-							class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a href="#" data-th-href="@{/event/list}">Events
-									List</a></li>
-							<li><a href="/event/settings">Events Settings</a></li>
-							<li><a href="/event/run">Events Run</a></li>
-							<li><a href="/event/account">Events Account</a></li>
 						</ul> <!-- /.nav-second-level -->
 					</li>
 

@@ -6,7 +6,6 @@ import de.mlo.exception.DuplicateEmploymentException;
 import de.mlo.exception.DuplicateGroupeException;
 import de.mlo.exception.EmploymentNotFoundException;
 import de.mlo.model.Employment;
-import de.mlo.model.Groupe;
 
 public interface EmploymentService {
 	

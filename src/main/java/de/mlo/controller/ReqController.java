@@ -152,7 +152,7 @@ public class ReqController {
 					"org.springframework.validation.BindingResult.reqDTO",
 					result);
 			redirectAttrs.addFlashAttribute("reqDTO", reqDTO);
-			return "redirect:/req/list";
+			return "redirect:/student/edit?id=" + id;
 		} else {
 			Req req = new Req();
 			req = getReq(reqDTO);
@@ -174,8 +174,6 @@ public class ReqController {
 	 */
 	private Req getReq(ReqDTO reqDTO) throws StudentNotFoundException {
 		Req req = new Req();
-		req.setId(reqDTO.getId());
-
 		req.setName(reqDTO.getName());
 		req.setStudent(studentService.getStudent(reqDTO.getStudent().getId()));
 		return req;
