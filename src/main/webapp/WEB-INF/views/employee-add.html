@@ -67,6 +67,14 @@
 								<td><input type="text" hidden="hidden" data-th-field="*{id}"></input></td>
 							</tr>
 							<tr>
+                            <th class="col-xs-2" data-th-text="#{employee.list.titles.label}">Title</th>
+                                <td>
+                                    <select class="form-control" th:field="*{title.id}">
+                                      <option th:each="title : ${allTitles}" th:value="${title.id}" th:text="${title.name}">Title</option>
+                                    </select>
+                                </td>
+                             </tr>
+							<tr>
 								<th class="col-xs-3" data-th-text="#{employee.list.employee.label}">Employeename</th>
 								<td><input class="form-control" type="text"	data-th-field="*{name}" placeholder="Employeename"></input></td>
 							</tr>
@@ -127,10 +135,10 @@
                                 </td>
                              </tr>
                              <tr>
-                             <th class="col-xs-2" data-th-text="#{employee.list.plzCiy.label}">PLZCity</th>
+                             <th class="col-xs-2" data-th-text="#{employee.list.plzCity.label}">PLZCity</th>
                                 <td>
                                     <select class="form-control" th:field="*{plzCity.id}">
-                                      <option th:each="plzCity : ${allPlzCity}" th:value="${plzCity.id}" th:text="${plzCity.plz} + ${plzCity.city}">Dropdown</option>
+                                      <option th:each="plzCity : ${allPlzCity}" th:value="${plzCity.id}" th:text="${plzCity.plz} + ${plzCity.city}">PLZCity</option>
                                     </select>
                                 </td>
                              </tr>
