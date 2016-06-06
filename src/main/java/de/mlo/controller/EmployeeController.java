@@ -26,7 +26,9 @@ import de.mlo.exception.EmployeeNotFoundException;
 import de.mlo.model.Employee;
 import de.mlo.model.Groupe;
 import de.mlo.model.Institut;
+import de.mlo.model.Title;
 import de.mlo.repository.PLZCityRepository;
+import de.mlo.repository.TitleRepository;
 import de.mlo.service.EmployeeService;
 import de.mlo.service.InstitutService;
 
@@ -56,6 +58,9 @@ public class EmployeeController {
 	
 	@Autowired
 	private PLZCityRepository plzRepo;
+	
+	@Autowired
+	private TitleRepository titleRepo;
 	/** The message source. */
 	@Autowired
 	private MessageSource messageSource;
@@ -69,6 +74,12 @@ public class EmployeeController {
 	@PreAuthorize("hasAnyRole('CTRL_USER_LIST_GET','CTRL_USER_EDIT_GET')")
 	public List<Institut> getAllGroupes() {
 		return instService.getInstituts();
+	}
+	
+	@ModelAttribute("allTitles")
+	@PreAuthorize("hasAnyRole('CTRL_USER_LIST_GET','CTRL_USER_EDIT_GET')")
+	public List<Title> getAllTitles() {
+		return titleRepo.findAll();
 	}
 
 	/**
