@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ import lombok.Setter;
  * The Class Permission.
  */
 @Entity
+@Table(name="GROUPE_PERMISSIONS")
 public class Permission extends BaseEntity implements GrantedAuthority {
 	
 	/** The Constant serialVersionUID. */

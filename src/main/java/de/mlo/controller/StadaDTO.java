@@ -2,6 +2,7 @@ package de.mlo.controller;
 
 import java.util.Date;
 
+import de.mlo.enums.ExamTry;
 import de.mlo.model.Employee;
 import de.mlo.model.Institut;
 import de.mlo.model.Student;
@@ -29,6 +30,11 @@ public class StadaDTO {
 	@Getter
 	@Setter
 	private examCategory examCategory;
+	
+
+	@Getter
+	@Setter
+	private boolean abbruch;
 	
 	/** The mark. */
 	/**
@@ -230,7 +236,7 @@ public class StadaDTO {
 	 * @param tries the new tries
 	 */
 	@Setter
-	private int tries;
+	private ExamTry tries;
 	
 	/** The usl. */
 	/**

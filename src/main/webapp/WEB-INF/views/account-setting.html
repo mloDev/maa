@@ -7,27 +7,51 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- Core CSS - Include with every page -->
-<link type="text/css" rel="stylesheet"
-	href="../../resources/css/bootstrap-3.1.1.min.css"
-	data-th-href="@{/resources/css/bootstrap-3.1.1.min.css}" />
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+	
+	<!-- jQuery UI -->
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js" ></script>
+	
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script type="text/javascript"
+		src="../../resources/js/bootstrap-3.1.1.min.js"
+		data-th-src="@{/resources/js/bootstrap-3.1.1.min.js}"></script>
 
-<link type="text/css" rel="stylesheet"
-	href="../../resources/font-awesome/css/font-awesome.css"
-	data-th-href="@{/resources/font-awesome/css/font-awesome.css}" />
+	<!-- Core Scripts - Include with every page -->
+	<script type="text/javascript"
+		src="../../resources/js/plugins/metisMenu/jquery.metisMenu.js"
+		data-th-src="@{/resources/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
 
-<!-- SB Admin CSS - Include with every page -->
-<link type="text/css" rel="stylesheet"
-	href="../../resources/css/sb-admin.css"
-	data-th-href="@{/resources/css/sb-admin.css}" />
+	<!-- SB Admin Scripts - Include with every page -->
+	<script type="text/javascript" src="../../resources/js/sb-admin.js"
+		data-th-src="@{/resources/js/sb-admin.js}"></script>
 
-<style>
-.no-border-on-me>thead>tr>th,.no-border-on-me>tbody>tr>th,.no-border-on-me>tfoot>tr>th,.no-border-on-me>thead>tr>td,.no-border-on-me>tbody>tr>td,.no-border-on-me>tfoot>tr>td
-	{
-	border-top-style: none;
-	border-bottom-style: none;
-}
-</style>
+
+	<!-- Core CSS - Include with every page -->
+	<link type="text/css" rel="stylesheet"
+		href="../../resources/css/bootstrap-3.1.1.min.css"
+		data-th-href="@{/resources/css/bootstrap-3.1.1.min.css}" />
+	
+	<link type="text/css" rel="stylesheet"
+		href="../../resources/font-awesome/css/font-awesome.css"
+		data-th-href="@{/resources/font-awesome/css/font-awesome.css}" />
+	
+	<!-- SB Admin CSS - Include with every page -->
+	<link type="text/css" rel="stylesheet"
+		href="../../resources/css/sb-admin.css"
+		data-th-href="@{/resources/css/sb-admin.css}" />
+		
+	<script type="text/javascript" src="../../resources/js/autosearch.js"
+			data-th-src="@{/resources/js/autosearch.js}"></script>
+
+	<style>
+	.no-border-on-me>thead>tr>th,.no-border-on-me>tbody>tr>th,.no-border-on-me>tfoot>tr>th,.no-border-on-me>thead>tr>td,.no-border-on-me>tbody>tr>td,.no-border-on-me>tfoot>tr>td
+		{
+		border-top-style: none;
+		border-bottom-style: none;
+	}
+	</style>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -71,14 +95,14 @@
 							<div class="form-group">
 								<label class="col-sm-5 control-label">Password</label>
 								<div class="col-sm-7">
-									<input type="text" class="form-control"
+									<input type="password" class="form-control"
 										data-th-value="*{password}" data-th-field="*{password}"></input>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-5 control-label">New Password</label>
 								<div class="col-sm-7">
-									<input type="text" class="form-control"
+									<input type="password" class="form-control"
 										data-th-value="*{password}"  data-th-field="*{password}"></input>
 								</div>
 							</div>
@@ -131,25 +155,6 @@
 		 <p style="text-align:center"> © 2016 IPVS</p>
 	</div>
 	<!-- /#wrapper -->
-
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script type="text/javascript"
-		src="../../resources/js/jquery-1.11.0.min.js"
-		data-th-src="@{/resources/js/jquery-1.11.0.min.js}"></script>
-
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script type="text/javascript"
-		src="../../resources/js/bootstrap-3.1.1.min.js"
-		data-th-src="@{/resources/js/bootstrap-3.1.1.min.js}"></script>
-
-	<!-- Core Scripts - Include with every page -->
-	<script type="text/javascript"
-		src="../../resources/js/plugins/metisMenu/jquery.metisMenu.js"
-		data-th-src="@{/resources/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
-
-	<!-- SB Admin Scripts - Include with every page -->
-	<script type="text/javascript" src="../../resources/js/sb-admin.js"
-		data-th-src="@{/resources/js/sb-admin.js}"></script>
 
 </body>
 </html>

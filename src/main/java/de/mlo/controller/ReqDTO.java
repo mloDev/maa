@@ -1,6 +1,18 @@
 package de.mlo.controller;
 
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import de.mlo.enums.ExamTry;
+import de.mlo.enums.Resone;
+import de.mlo.model.Restrictions;
 import de.mlo.model.Student;
+import de.mlo.model.requestCategory;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,21 +38,6 @@ public class ReqDTO {
 	private int id;
 	
 	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
-	 */
-	@Setter
-	
-	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
-	@Getter
-	private String name;
-	
-	/**
 	 * Sets the student id.
 	 *
 	 * @param studentId the new student id
@@ -54,6 +51,51 @@ public class ReqDTO {
 	 */
 	@Getter
 	private Student student;
+	@Setter
+	@Getter
+	@OneToOne
+	@JoinColumn(name = "PA_AK_ID")
+	private requestCategory cat;
+
+	@Setter
+	@Getter
+	private Restrictions restriction;
+	
+	@Setter
+	@Getter
+	private Resone resone;
+	
+	@Setter
+	@Getter
+	private boolean frist;
+	
+	@Setter
+	@Getter
+	private String note;
+	
+	@Setter
+	@Getter
+	private Date anlege;
+	
+	@Setter
+	@Getter
+	private Date betr;
+	
+	@Setter
+	@Getter
+	private Date div;
+	
+	@Setter
+	@Getter
+	private String mark;
+	
+	@Setter
+	@Getter
+	private boolean schein;
+	
+	@Setter
+	@Getter
+	private ExamTry examTry;
 
 
 }

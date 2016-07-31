@@ -1,5 +1,7 @@
 package de.mlo.controller;
 
+import javax.persistence.Column;
+
 import de.mlo.enums.Gender;
 import de.mlo.model.Employment;
 import de.mlo.model.Institut;
@@ -19,6 +21,19 @@ public class EmployeeDTO {
 	@Setter
 	private int id;
 
+	@Getter
+	@Setter
+	private String notiz;
+	
+	@Getter
+	@Setter
+	private boolean pav;
+	
+	
+	@Getter
+	@Setter
+	private String buero;
+	
 	@Getter
 	@Setter
 	private String label;

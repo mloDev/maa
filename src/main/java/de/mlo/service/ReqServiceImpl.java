@@ -44,8 +44,8 @@ public class ReqServiceImpl implements ReqService {
 	 * @see de.mlo.service.ReqService#getReq(java.lang.String)
 	 */
 	@Override
-	public Req getReq(String reqname) throws ReqNotFoundException {
-		return reqRepo.findByName(reqname);
+	public Req getReq(Integer reqId) throws ReqNotFoundException {
+		return reqRepo.findOne(reqId);
 	}
 
 	/* (non-Javadoc)

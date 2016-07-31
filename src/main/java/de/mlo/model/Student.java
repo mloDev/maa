@@ -58,7 +58,7 @@ public class Student implements Serializable {
 	/** The id. */
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "STUD_ID")
 	
 	/**
 	 * Gets the id.
@@ -75,8 +75,77 @@ public class Student implements Serializable {
 	@Setter
 	private int id;
 	
+	@Column(name = "STUD_FSUpdDatum")
+	@Getter
+	@Setter
+	private Date FSUpdate;
+
+	@JoinColumn(name = "STUD_STG_ID")
+	@Getter
+	@Setter
+	@OneToOne
+	private CoursesOfStudie stg_1;
+
+	@JoinColumn(name = "STUD_STG1_ID")
+	@Getter
+	@Setter
+	@OneToOne
+	private CoursesOfStudie stg_2;
+
+	@JoinColumn(name = "STUD_STG2_ID")
+	@Getter
+	@Setter
+	@OneToOne
+	private CoursesOfStudie stg_3;
+
+	@JoinColumn(name = "STUD_STAAT_ID")
+	@Getter
+	@Setter
+	@OneToOne
+	private State state;
+	
+	@JoinColumn(name = "STUD_STAAT_ID1")
+	@Getter
+	@Setter
+	@OneToOne
+	private State state1;
+	
+	@JoinColumn(name = "STUD_STAAT_ID2")
+	@Getter
+	@Setter
+	@OneToOne
+	private State state2;
+
+	@Column(name = "STUD_KtoNr")
+	@Getter
+	@Setter
+	private String bankNr;
+
+	@JoinColumn(name = "STUD_KK_ID")
+	@Getter
+	@Setter
+	@OneToOne
+	private Company KK;
+	
+	@Column(name = "STUD_privatversichert")
+	@Getter
+	@Setter
+	private boolean privatIns;
+
+	@JoinColumn(name = "STUD_KKOrt_ID")
+	@Getter
+	@Setter
+	@OneToOne
+	private PLZCity InsPlace;
+	
+	@Column(name = "STUD_Adresse")
+	@Getter
+	@Setter
+	private String address;
+	
+	
 	/** The mat no. */
-	@Column
+	@Column(name = "STUD_MtrNr")
 	
 	/**
 	 * Gets the mat no.
@@ -94,7 +163,7 @@ public class Student implements Serializable {
 	private String matNo;
 	
 	/** The mat no old. */
-	@Column
+	@Column(name = "STUD_MtrNr1")
 	
 	/**
 	 * Gets the mat no old.
@@ -112,7 +181,7 @@ public class Student implements Serializable {
 	private String matNoOld;
 	
 	/** The name. */
-	@Column
+	@Column(name = "STUD_Name")
 	
 	/**
 	 * Gets the name.
@@ -130,7 +199,7 @@ public class Student implements Serializable {
 	private String name;
 	
 	/** The sur name. */
-	@Column
+	@Column(name = "STUD_Vorname")
 	
 	/**
 	 * Gets the sur name.
@@ -148,7 +217,7 @@ public class Student implements Serializable {
 	private String surName;
 	
 	/** The birth name. */
-	@Column
+	@Column(name = "STUD_GebName")
 	
 	/**
 	 * Gets the birth name.
@@ -166,7 +235,7 @@ public class Student implements Serializable {
 	private String birthName;
 	
 	/** The e mail. */
-	@Column
+	@Column(name = "STUD_Mail")
 	
 	/**
 	 * Gets the e mail.
@@ -184,7 +253,7 @@ public class Student implements Serializable {
 	private String eMail;
 	
 	/** The inactive. */
-	@Column
+	@Column(name = "STUD_blnInaktiv")
 	
 	/**
 	 * Checks if is inactive.
@@ -202,7 +271,7 @@ public class Student implements Serializable {
 	private boolean inactive;
 	
 	/** The archived. */
-	@Column
+	@Column(name = "STUD_blnArchiv")
 	
 	/**
 	 * Checks if is archived.
@@ -220,7 +289,7 @@ public class Student implements Serializable {
 	private boolean archived;
 	
 	/** The archiv year. */
-	@Column
+	@Column(name = "STUD_ArchivJahr")
 	
 	/**
 	 * Gets the archiv year.
@@ -238,7 +307,7 @@ public class Student implements Serializable {
 	private int archivYear;
 	
 	/** The geb date. */
-	@Column
+	@Column(name = "STUD_GebDat")
 	
 	/**
 	 * Gets the geb date.
@@ -258,7 +327,7 @@ public class Student implements Serializable {
 	private Date gebDate;
 	
 	/** The phone. */
-	@Column
+	@Column(name = "STUD_Telefon")
 	
 	/**
 	 * Gets the phone.
@@ -276,7 +345,7 @@ public class Student implements Serializable {
 	private String phone;
 
 	/** The mobile. */
-	@Column
+	@Column(name = "STUD_Mobil")
 	
 	/**
 	 * Gets the mobile.
@@ -294,7 +363,7 @@ public class Student implements Serializable {
 	private String mobile;
 	
 	/** The marital status. */
-	@Column
+	@Column(name = "STUD_Familienstand")
 	
 	/**
 	 * Gets the marital status.
@@ -312,7 +381,7 @@ public class Student implements Serializable {
 	private String 	maritalStatus;
 	
 	/** The sv no. */
-	@Column
+	@Column(name = "STUD_Sv_Nr")
 	
 	/**
 	 * Gets the sv no.
@@ -330,7 +399,7 @@ public class Student implements Serializable {
 	private String svNo;
 	
 	/** The fs. */
-	@Column
+	@Column(name = "STUD_FS")
 	
 	/**
 	 * Gets the fs.
@@ -348,7 +417,7 @@ public class Student implements Serializable {
 	private int	fs;
 	
 	/** The price winner. */
-	@Column
+	@Column(name = "STUD_Preistraeger")
 	
 	/**
 	 * Checks if is price winner.
@@ -369,7 +438,7 @@ public class Student implements Serializable {
 	
 	/** The gender. */
 	@Enumerated(EnumType.STRING)
-	@Column
+	@Column(name = "STUD_Geschlecht")
 	
 	/**
 	 * Gets the gender.

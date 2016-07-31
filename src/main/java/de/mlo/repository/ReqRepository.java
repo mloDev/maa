@@ -12,14 +12,6 @@ import de.mlo.model.Req;
  */
 public interface ReqRepository extends JpaRepository<Req, Integer> {
 	
-	/**
-	 * Find by name.
-	 *
-	 * @param name the name
-	 * @return the req
-	 */
-	Req findByName(String name);
-	
 	List<Req> findAllByStudentId (int id);
 
 

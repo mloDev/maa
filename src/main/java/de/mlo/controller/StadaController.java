@@ -180,7 +180,6 @@ public class StadaController {
 			Stada stada = new Stada();
 			stada = getStada(stadaDTO);
 			stadaService.addStada(stada);
-			logger.info("StadaDTO add error: ");
 			String message = messageSource
 					.getMessage("ctrl.message.success.add", new Object[] {
 							businessObject, stada.getTitle() }, Locale.US);

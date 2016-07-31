@@ -37,7 +37,7 @@ public interface ReqService {
 	 * @return the req
 	 * @throws ReqNotFoundException the req not found exception
 	 */
-	public Req getReq(String reqname)
+	public Req getReq(Integer reqId)
 			throws ReqNotFoundException;
 
 	/**

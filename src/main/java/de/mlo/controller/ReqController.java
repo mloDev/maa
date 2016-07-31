@@ -1,15 +1,22 @@
 package de.mlo.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +29,9 @@ import de.mlo.exception.ReqNotFoundException;
 import de.mlo.exception.StudentNotFoundException;
 import de.mlo.exception.UserNotFoundException;
 import de.mlo.model.Req;
+import de.mlo.model.Restrictions;
 import de.mlo.model.Student;
+import de.mlo.repository.RestrictionRepository;
 import de.mlo.service.ReqService;
 import de.mlo.service.StudentService;
 
@@ -34,7 +43,21 @@ import de.mlo.service.StudentService;
 @RequestMapping(value = "/req")
 public class ReqController {
 	
+	/**
+	 * Inits the binder.
+	 *
+	 * @param binder the binder
+	 */
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true);
+        binder.registerCustomEditor(Date.class, editor);
+    }
 
+	/** The logger. */
+	static Logger logger = LoggerFactory
+			.getLogger(ReqController.class);
+	
 	/** The business object. */
 	static String businessObject = "req"; // used in RedirectAttributes
 											// messages
@@ -50,6 +73,15 @@ public class ReqController {
 	/** The student service. */
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
+	private RestrictionRepository restrictionRepo;
+	
+	
+	@ModelAttribute("allSRestrictions")
+	public List<Restrictions> getAllRestrictions() {
+		return restrictionRepo.findAll();
+	}
 	
 	/**
 	 * Gets the all students.
@@ -124,7 +156,7 @@ public class ReqController {
 			reqService.addReq(req);
 			String message = messageSource
 					.getMessage("ctrl.message.success.add", new Object[] {
-							businessObject, req.getName() }, Locale.US);
+							businessObject, req.getId()}, Locale.US);
 			redirectAttrs.addFlashAttribute("message", message);
 			return "redirect:/req/list";
 		}
@@ -135,7 +167,7 @@ public class ReqController {
 	public String addReqPageById(
 			@RequestParam(value = "id", required = true) Integer id,
 			Model model, RedirectAttributes redirectAttrs, @Valid @ModelAttribute ReqDTO reqDTO,
-			BindingResult result) throws StudentNotFoundException, DuplicateReqException {
+			BindingResult result) throws DuplicateReqException, ReqNotFoundException, StudentNotFoundException {
 		model.addAttribute("studentDTO", studentService.getStudent(id));
 		reqDTO.setStudent(studentService.getStudent(id));
 		return "req-add";
@@ -152,6 +184,7 @@ public class ReqController {
 					"org.springframework.validation.BindingResult.reqDTO",
 					result);
 			redirectAttrs.addFlashAttribute("reqDTO", reqDTO);
+			logger.info("ReqDTO add error: " + result.toString());
 			return "redirect:/student/edit?id=" + id;
 		} else {
 			Req req = new Req();
@@ -159,7 +192,7 @@ public class ReqController {
 			reqService.addReq(req);
 			String message = messageSource
 					.getMessage("ctrl.message.success.add", new Object[] {
-							businessObject, req.getName() }, Locale.US);
+							businessObject, req.getId() }, Locale.US);
 			redirectAttrs.addFlashAttribute("message", message);
 			return "redirect:/student/edit?id=" + id;
 		}
@@ -174,7 +207,16 @@ public class ReqController {
 	 */
 	private Req getReq(ReqDTO reqDTO) throws StudentNotFoundException {
 		Req req = new Req();
-		req.setName(reqDTO.getName());
+		req.setAnlege(reqDTO.getAnlege());
+		req.setBetr(reqDTO.getBetr());
+		req.setDiv(reqDTO.getDiv());
+		req.setExamTry(reqDTO.getExamTry());
+		req.setMark(reqDTO.getMark());
+		req.setNote(reqDTO.getNote());
+		req.setResone(reqDTO.getResone());
+		req.setRestriction(reqDTO.getRestriction());
+		req.setSchein(reqDTO.isSchein());
+		req.setFrist(reqDTO.isFrist());
 		req.setStudent(studentService.getStudent(reqDTO.getStudent().getId()));
 		return req;
 	}
@@ -215,7 +257,16 @@ public class ReqController {
 	private ReqDTO getReqDTO(Req req) throws StudentNotFoundException {
 		ReqDTO reqDTO = new ReqDTO();
 		reqDTO.setId(req.getId());
-		reqDTO.setName(req.getName());
+		reqDTO.setAnlege(req.getAnlege());
+		reqDTO.setBetr(req.getBetr());
+		reqDTO.setDiv(req.getDiv());
+		reqDTO.setExamTry(req.getExamTry());
+		reqDTO.setMark(req.getMark());
+		reqDTO.setNote(req.getNote());
+		reqDTO.setResone(req.getResone());
+		reqDTO.setRestriction(req.getRestriction());
+		reqDTO.setSchein(req.isSchein());
+		reqDTO.setFrist(req.isFrist());
 		reqDTO.setStudent(studentService.getStudent(req.getStudent().getId()));
 		return reqDTO;
 	}
@@ -245,7 +296,7 @@ public class ReqController {
 				null, Locale.US))) {
 			String message = messageSource.getMessage(
 					"ctrl.message.success.cancel", new Object[] { "Edit",
-							businessObject, reqDTO.getName() }, Locale.US);
+							businessObject, reqDTO.getId() }, Locale.US);
 			redirectAttrs.addFlashAttribute("message", message);
 		} else if (result.hasErrors()) {
 			redirectAttrs.addFlashAttribute(
@@ -259,7 +310,7 @@ public class ReqController {
 			reqService.updateReq(req);;
 			String message = messageSource.getMessage(
 					"ctrl.message.success.update", new Object[] {
-							businessObject, reqDTO.getName() },
+							businessObject, reqDTO.getId() },
 					Locale.US);
 			redirectAttrs.addFlashAttribute("message", message);
 		}

@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import de.mlo.enums.ExamTry;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +30,7 @@ public class Stada {
 	/** The id. */
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "STADA_ID")
 	
 	/**
 	 * Gets the id.
@@ -48,23 +51,25 @@ public class Stada {
 	@Setter
 	@Getter
 	@ManyToOne
-	@JoinTable(name = "student_stadas")
+	@JoinColumn(name = "STADA_STUD_ID")
 	private Student student;
 	
 	/** The institut. */
 	@OneToOne
 	@Getter
 	@Setter
+	@JoinColumn(name="STADA_ABT_ID")
 	private Institut institut;
 	
 	/** The exam category. */
 	@OneToOne
 	@Getter
 	@Setter
+	@JoinColumn(name="STADA_PB_ID")
 	private examCategory examCategory;
 	
 	/** The mark. */
-	@Column
+	@Column(name="STADA_Note")
 	
 	/**
 	 * Gets the mark.
@@ -85,16 +90,18 @@ public class Stada {
 	@OneToOne
 	@Getter
 	@Setter
+	@JoinColumn(name="STADA_IvIMit1_ID")
 	private Employee employeeOne;
 	
 	/** The employee two. */
 	@OneToOne
 	@Getter
 	@Setter
+	@JoinColumn(name="STADA_IvIMit2_ID")
 	private Employee employeeTwo;
 	
 	/** The start. */
-	@Column
+	@Column(name="STADA_Beginn")
 	
 	/**
 	 * Gets the start.
@@ -112,7 +119,7 @@ public class Stada {
 	private Date start;
 	
 	/** The end. */
-	@Column
+	@Column(name="STADA_Ende")
 	
 	/**
 	 * Gets the end.
@@ -130,7 +137,7 @@ public class Stada {
 	private Date end;
 	
 	/** The due. */
-	@Column
+	@Column(name="STADA_Abgabe")
 	
 	/**
 	 * Gets the due.
@@ -148,7 +155,7 @@ public class Stada {
 	private Date due;
 	
 	/** The pause. */
-	@Column
+	@Column(name="STADA_Pause")
 	
 	/**
 	 * Gets the pause.
@@ -166,7 +173,7 @@ public class Stada {
 	private Date pause;
 	
 	/** The ban. */
-	@Column
+	@Column(name="STADA_Sperre")
 	
 	/**
 	 * Gets the ban.
@@ -184,7 +191,7 @@ public class Stada {
 	private Date ban;
 	
 	/** The stada no. */
-	@Column
+	@Column(name="STADA_NrSTADA")
 	
 	/**
 	 * Gets the stada no.
@@ -202,7 +209,7 @@ public class Stada {
 	private int stadaNo;
 	
 	/** The title. */
-	@Column
+	@Column(name="STADA_Titel")
 	
 	/**
 	 * Gets the title.
@@ -220,7 +227,7 @@ public class Stada {
 	private String title;
 	
 	/** The note. */
-	@Column
+	@Column(name="STADA_Notiz")
 	
 	/**
 	 * Gets the note.
@@ -238,7 +245,7 @@ public class Stada {
 	private String note;
 	
 	/** The is public. */
-	@Column
+	@Column(name="STADA_public")
 	
 	/**
 	 * Checks if is public.
@@ -256,7 +263,7 @@ public class Stada {
 	private boolean isPublic;
 	
 	/** The is released. */
-	@Column
+	@Column(name="STADA_Freigabe")
 	
 	/**
 	 * Checks if is released.
@@ -274,7 +281,8 @@ public class Stada {
 	private boolean isReleased;
 	
 	/** The tries. */
-	@Column
+	@Column(name="STADA_Versuch")
+	@Enumerated(EnumType.STRING)
 	
 	/**
 	 * Gets the tries.
@@ -289,10 +297,10 @@ public class Stada {
 	 * @param tries the new tries
 	 */
 	@Setter
-	private int tries;
+	private ExamTry tries;
 	
 	/** The usl. */
-	@Column
+	@Column(name="STADA_USL")
 	
 	/**
 	 * Checks if is usl.
@@ -308,4 +316,12 @@ public class Stada {
 	 */
 	@Setter
 	private boolean USL;
+	
+	
+	@Column(name="STADA_Abbruch")
+
+	@Getter
+
+	@Setter
+	private boolean abbruch;
 }

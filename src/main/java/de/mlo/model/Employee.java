@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -95,7 +96,7 @@ public class Employee {
 	private Gender gender;
 	
 	/** The tel no. */
-	@Column(nullable = true)
+	@Column(name = "IvIMit_Telefon", nullable = true)
 	
 	/**
 	 * Gets the tel no.
@@ -113,7 +114,7 @@ public class Employee {
 	private String telNo;
 	
 	/** The tel fax. */
-	@Column(nullable = true)
+	@Column(name = "IvIMit_Fax", nullable = true)
 	
 	/**
 	 * Gets the tel fax.
@@ -131,7 +132,7 @@ public class Employee {
 	private int telFax;
 	
 	/** The tel short. */
-	@Column(nullable = true)
+	@Column(name = "IvIMit_Durchwahl", nullable = true)
 	
 	/**
 	 * Gets the tel short.
@@ -149,7 +150,7 @@ public class Employee {
 	private int telShort;
 	
 	/** The priv tel. */
-	@Column(nullable = true)
+	@Column(name = "IvIMit_PrivTel", nullable = true)
 	
 	/**
 	 * Gets the priv tel.
@@ -167,7 +168,7 @@ public class Employee {
 	private String privTel;
 	
 	/** The priv fax. */
-	@Column(nullable = true)
+	@Column(name = "IvIMit_privFax", nullable = true)
 	
 	/**
 	 * Gets the priv fax.
@@ -185,7 +186,7 @@ public class Employee {
 	private String privFax;
 	
 	/** The mobil no. */
-	@Column(nullable = true)
+	@Column(name = "IvIMit_Mobil", nullable = true)
 	
 	/**
 	 * Gets the mobil no.
@@ -203,7 +204,7 @@ public class Employee {
 	private String mobilNo;
 	
 	/** The allow exam. */
-	@Column(nullable = true)
+	@Column(name = "IvIMit_exam", nullable = true)
 	
 	/**
 	 * Checks if is allow exam.
@@ -221,7 +222,7 @@ public class Employee {
 	private boolean allowExam;
 	
 	/** The priv e mail. */
-	@Column(nullable = true)
+	@Column(name = "IvIMit_PrivMail", nullable = true)
 	
 	/**
 	 * Gets the priv e mail.
@@ -239,7 +240,7 @@ public class Employee {
 	private String privEMail;
 	
 	/** The e mail. */
-	@Column(nullable = true)
+	@Column(name = "IvIMit_IvIMail", nullable = true)
 	
 	/**
 	 * Gets the e mail.
@@ -257,7 +258,7 @@ public class Employee {
 	private String eMail;
 	
 	/** The homepage. */
-	@Column(nullable = true)
+	@Column(name = "IvIMit_Homepage", nullable = true)
 	
 	/**
 	 * Gets the homepage.
@@ -290,10 +291,11 @@ public class Employee {
 	 * @param plzCity the new plz city
 	 */
 	@Setter
+	@JoinTable(name = "IvIMit_PLZ_ID")
 	private PLZCity plzCity;
 	
 	/** The street. */
-	@Column(nullable = true)
+	@Column(name = "IvIMit_Adresse", nullable = true)
 	
 	/**
 	 * Gets the street.
@@ -344,7 +346,24 @@ public class Employee {
 	 * @param institut the new institut
 	 */
 	@Setter
-	private Institut institut;	
+	@JoinTable(name="IvIMit_Institut_ID")
+	private Institut institut;
+	
+	@Getter
+	@Setter
+	@Column(name="IvIMit_Notiz")
+	private String notiz;
+	
+	@Getter
+	@Setter
+	@Column(name="IvIMit_Buero")
+	private String buero;
+
+	@Getter
+	@Setter
+	@Column(name="IvIMit_PAV")
+	private boolean pav;
+	
 	
 	/** The employment. */
 	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
@@ -362,10 +381,12 @@ public class Employee {
 	 * @param employment the new employment
 	 */
 	@Setter
+
+	@JoinTable(name="IvIMit_AG_ID")
 	private Employment employment;
 	
 	/** The lvvo. */
-	@Column(nullable = true)
+	@Column(name="LVVO_ID", nullable = true)
 	
 	/**
 	 * Gets the lvvo.
