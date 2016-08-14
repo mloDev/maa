@@ -153,7 +153,6 @@ public class StudentController {
 				model.addAttribute("studentDTO", studentDTO);
 				model.addAttribute("studentReq", studentDTO.getReqList());
 				model.addAttribute("studentStada", stadaService.getStadasByStudent(student));
-				logger.info("Student " + student.getId() + " with: " + studentDTO.getReqList().size() + " Reqs.");
 			}
 			return "student-edit";
 		} catch (StudentNotFoundException e) {

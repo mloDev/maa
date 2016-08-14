@@ -71,7 +71,7 @@ public class Employment{
 	 * @param desc the new desc
 	 */
 	@Setter
-	private String desc;
+	private String describtion;
 
 
 }
